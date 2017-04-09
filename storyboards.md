@@ -12,4 +12,4 @@
 
 ### Tina ###
 ![storyboard 1](/images/storyboard/storyboard_tina1.png)
-![storyboard 2](/images/storyboard/storyboard_tina1.png)
+![storyboard 2](/images/storyboard/storyboard_tina2.png)
