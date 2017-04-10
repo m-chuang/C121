@@ -7,8 +7,8 @@
 ![storyboard 2](/images/storyboard/storytest.png)
 
 ### Scott ###
-![storyboard 1](/images/storyboard/storyboard_scott1.jpg)
-![storyboard 2](/images/storyboard/storyboard_scott1.jpg)
+![storyboard 1](/images/storyboard/storyboard_scott_1.jpg)
+![storyboard 2](/images/storyboard/storyboard_scott_2.jpg)
 
 ### Tina ###
 ![storyboard 1](/images/storyboard/storyboard_tina1.png)
