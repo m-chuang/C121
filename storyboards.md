@@ -1,6 +1,6 @@
 ### Ashley ###
-![storyboard 1](/images/storyboard/storytest.png)
-![storyboard 2](/images/storyboard/storytest.png)
+![storyboard 1](/images/storyboard/storyboard_ashley_1.jpg)
+![storyboard 2](/images/storyboard/storyboard_ashley_2.jpg)
 
 ### Michael ###
 ![storyboard 1](/images/storyboard/storytest.png)
