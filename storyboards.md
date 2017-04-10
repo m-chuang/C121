@@ -3,8 +3,8 @@
 ![storyboard 2](/images/storyboard/storyboard_ashley_2.jpg)
 
 ### Michael ###
-![storyboard 1](/images/storyboard/storytest.png)
-![storyboard 2](/images/storyboard/storytest.png)
+![storyboard 1](/images/storyboard/storyboard_michael_1.png)
+![storyboard 2](/images/storyboard/storyboard_michael_2.png)
 
 ### Scott ###
 ![storyboard 1](/images/storyboard/storyboard_scott_1.jpg)
