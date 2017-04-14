@@ -22,9 +22,11 @@ Map - Michael/Ashley
   * World map
   * Dynamic overlay
   * Item locations  
+  
 Avatar - Scott/Ashley  
   * Ferret
   * Items 
   * Mutable characters  
+
 UI - Tina  
   * Interface
