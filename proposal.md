@@ -19,12 +19,12 @@ Users can collect souvenir-like items based on the kind of places they visit (fo
 
 ### Programming Split  
 Map - Michael/Ashley
-* World map
-* Dynamic overlay
-* Item locations  
-Avatar - Scott/Ashley
-* Ferret
-* Items 
-* Mutable characters  
-UI - Tina
-* Interface
+  * World map
+  * Dynamic overlay
+  * Item locations  
+Avatar - Scott/Ashley  
+  * Ferret
+  * Items 
+  * Mutable characters  
+UI - Tina  
+  * Interface
