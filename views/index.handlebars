@@ -1,8 +1,74 @@
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Test Page</title>
-</head>
-<body>
-Begin here (or replace this with any static code already written).
-</body>
+  <head>
+    <style>
+       #map {
+        height: 100%;
+        width: 100%;
+       }
+       html,body{
+       	height: 100%;
+       	margin: 0;
+       	padding: 0;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>It's my candy ;3</h3>
+    <div id="map"></div>
+    <script>
+    	// Function to calculate how many tiles needed to overlay, then goes and does it.
+    	function tileOverlay(topLeft,bottomRight){
+
+	    }
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+            var imageBounds = {
+          		north: pos.lat + .0003,
+          		south: pos.lat - .0003,
+          		east:  pos.lng + .0003,
+          		west:  pos.lng - .0003
+        	};
+
+        historicalOverlay = new google.maps.GroundOverlay(
+            'https://people.ucsc.edu/~kiqnguye/grass_wallpaper.png',
+            imageBounds);
+        historicalOverlay.setMap(map);
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+        
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSeT5rOlsjBJr1kBi0heKYx2qHq_EnjXM&callback=initMap">
+    </script>
+  </body>
 </html>
