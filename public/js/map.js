@@ -39,7 +39,7 @@ function initMap() {
   var uluru = {lat: -25.363, lng: 131.044};
 
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 18, // default zoom level
+    zoom: 20, // default zoom level
     center: uluru
   });
 
@@ -91,13 +91,34 @@ function initMap() {
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
+    'Error: Ferret cannot find your location.' :
     'Error: Your browser doesn\'t support geolocation.');
      infoWindow.open(map);
 }
 
+var marker = null;
 function autoUpdate() {
+  navigator.geolocation.getCurrentPosition(function(position) {  
+    var newPoint = new google.maps.LatLng(position.coords.latitude, 
+                                          position.coords.longitude);
 
+    if (marker) {
+      // Marker already created - move to current location
+      marker.setPosition(newPoint);
+    }
+    else {
+      marker = new google.maps.Marker({
+        position: newPoint,
+        map: map
+      });
+    }
 
+    // Centering map in new position
+    map.setCenter(newPoint);
+  });
+
+  // Calling autoUpdate every second
   setTimeout(autoUpdate, 1000)
 }
+
+autoUpdate();
