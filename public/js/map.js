@@ -1,3 +1,6 @@
+var map;
+var heatmap;
+
 // Function to calculate how many tiles needed to overlay, then goes and does it.
 // topLeftX = the top left X coordinate
 // topLeftY = the top right Y coordinate
@@ -10,7 +13,7 @@ function CoordMapType(tileSize) {
   this.tileSize = tileSize;
 }
 
-/* overlay pattern */
+/* tile overlay pattern */
 CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   var div = ownerDocument.createElement('div');
   div.innerHTML = coord;
@@ -18,26 +21,36 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.style.height = this.tileSize.height + 'px';
   div.style.fontSize = '10';
   div.style.borderStyle = 'solid';
+
+  // border properties
   div.style.borderWidth = '1px';
   div.style.borderColor = '#AAAAAA';
+
+  // image url
   div.style.backgroundImage = "url('/images/grass_wallpaper.png')";
-  div.style.opacity = ".6";
+  div.style.opacity = ".6"; // change opacity
   return div;
 };
 
 
+// initializing the map
 function initMap() {
+  // current centered location
   var uluru = {lat: -25.363, lng: 131.044};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 18,
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 18, // default zoom level
     center: uluru
   });
+
+  // current location marker
   var marker = new google.maps.Marker({
     position: uluru,
     map: map
   });
   infoWindow = new google.maps.InfoWindow;
 
+  // Get current location
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
