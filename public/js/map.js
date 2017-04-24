@@ -1,11 +1,14 @@
 // Shared variables
 var map;
+var defaultCenter;
+var marker;
+var icon;
 var heatmap;
 
 
 function initMap() {
-  // default centered location (Student Health and Wellness Center)
-  var defaultCenter = {lat: 32.879425, lng: -117.238037};
+  // Default centered location (Student Health and Wellness Center)
+  defaultCenter = {lat: 32.879425, lng: -117.238037};
 
   // Initialize the map
   map = new google.maps.Map(document.getElementById('map'), {
@@ -13,9 +16,9 @@ function initMap() {
     center: defaultCenter
   });
 
-  // patterened tile overlay
+  // Patterened tile overlay
   map.overlayMapTypes.insertAt(
-      0, new CoordMapType(new google.maps.Size(256, 256)));
+    0, new CoordMapType(new google.maps.Size(256, 256)));
 
   // Initialize the heatmap
   heatmap = new google.maps.visualization.HeatmapLayer({
@@ -23,8 +26,8 @@ function initMap() {
     map: map
   });
 
-  // current location marker (red)
-  var marker = new google.maps.Marker({
+  // Default location marker (red)
+  marker = new google.maps.Marker({
     position: defaultCenter,
     map: map
   });
@@ -77,7 +80,7 @@ function initMap() {
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
+    'Error: Ferret cannot find your location.' :
     'Error: Your browser doesn\'t support geolocation.');
      infoWindow.open(map);
 }
@@ -85,8 +88,29 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 // autoUpdate to track user location data
 function autoUpdate() {
-  setTimeout(autoUpdate, 1000); // how often to track and update location data
+  navigator.geolocation.getCurrentPosition(function(position) {  
+    var newPoint = new google.maps.LatLng(position.coords.latitude, 
+                                          position.coords.longitude);
+
+    if (marker) {
+      // Marker already created - move to current location
+      marker.setPosition(newPoint);
+    }
+    else {
+      marker = new google.maps.Marker({
+        position: newPoint,
+        map: map
+      });
+    }
+
+    // Centering map in new position
+    map.setPosition(newPoint);
+  });
+
+  // Calling autoUpdate every second
+  setTimeout(autoUpdate, 1000);
 }
+autoUpdate();
 
 
 // Get map data points (used for the Heatmap)
@@ -95,6 +119,7 @@ function getPoints() {
     new google.maps.LatLng(32.8796116,-117.2358329),
   ];
 }
+
 
 // Function to calculate how many tiles needed to overlay, then goes and does it.
 // topLeftX = the top left X coordinate
