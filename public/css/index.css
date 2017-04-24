@@ -1,0 +1,12 @@
+/* page defaults */
+html,body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Map container */
+#map {
+	height: 80%;
+	width: 100%;
+}
