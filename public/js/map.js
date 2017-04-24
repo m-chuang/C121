@@ -33,14 +33,20 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
 };
 
 
-// initializing the map
 function initMap() {
   // current centered location
   var uluru = {lat: -25.363, lng: 131.044};
 
+  // Initialize the map
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18, // default zoom level
     center: uluru
+  });
+
+  // Initialize the heatmap
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data: getPoints(),
+    map: map
   });
 
   // current location marker
@@ -58,6 +64,9 @@ function initMap() {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
+
+      // Print to console the coordinates of the current location
+      console.log("lat=" + pos.lat + ", lng=" + pos.lng);
 
       infoWindow.setPosition(pos);
       infoWindow.setContent('Location found.');
@@ -85,4 +94,12 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+}
+
+
+// Get map data points (used for the Heatmap)
+function getPoints() {
+  return [
+    new google.maps.LatLng(32.8796116,-117.2358329),
+  ];
 }
