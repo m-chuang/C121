@@ -2,7 +2,7 @@
 var map;
 var defaultCenter;
 var marker;
-var icon;
+var icon = "/images/test_ferret.png";
 var heatmap;
 
 
@@ -29,6 +29,7 @@ function initMap() {
   // Default location marker (red)
   marker = new google.maps.Marker({
     position: defaultCenter,
+    icon: '/images/test_ferret.png',
     map: map
   });
 
@@ -99,12 +100,13 @@ function autoUpdate() {
     else {
       marker = new google.maps.Marker({
         position: newPoint,
+        icon: '/images/test_ferret.png',
         map: map
       });
     }
 
     // Centering map in new position
-    map.setPosition(newPoint);
+    map.setCenter(newPoint);
   });
 
   // Calling autoUpdate every second
