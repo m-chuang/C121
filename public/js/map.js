@@ -106,7 +106,7 @@ function autoUpdate() {
     }
 
     // Centering map in new position
-    map.setCenter(newPoint);
+    map.setPosition(newPoint);
   });
 
   // Calling autoUpdate every second
