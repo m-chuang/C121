@@ -1,7 +1,7 @@
 # Team Member Contributions #
 
 ### Ashley ###
-...
+I worked on implementing the tracking feature of our map that updates the user's position every second. Currently, we need further discussion and testing to see if we need to update position more often in order to make a smoother transition effect. At the moment, the current tracking implementation will make it easy to store data for the heatmap. Additionaly, I changed the Marker icon to be a substitute ferret image which will later be changed with our design.
 
 
 ### Michael ###
