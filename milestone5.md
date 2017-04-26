@@ -5,7 +5,7 @@ I worked on implementing the tracking feature of our map that updates the user's
 
 
 ### Michael ###
-...
+I worked on ideas for setting up the map - at first I looked into doing a single overlay, but eventually found it wiser to do a tile overlay. One problem with the tile overlay is the presence of the tile boundaries and coordinates; in the future, I hope to be able to remove or hide this information. In addition, I worked on adding an "error" or "exploration" radius. This blue circle around your location helps alleviate the concerns over trespassing on private property or GPS inaccuracies. One thing that needs to be done is to scale the radius with zoom level; at the moment, it works fine with the initial setup but does not scale if the zoom level is changed. At first I used a geolocation-marker library to implement this function, but I found it simpler to simply draw and redraw a circle on the map around the user's location.
 
 
 ### Scott ###
