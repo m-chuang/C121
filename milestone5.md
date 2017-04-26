@@ -9,7 +9,7 @@
 
 
 ### Scott ###
-...
+I worked on setting up the map for our app and creating the "grass" overlay for our app that will scale along with map. It currently is limited to a specific zoom setting because if you zoom in, the overlay will remain at the same size. This could prove to be an issue if we allow users to zoom. In this event, I would replace the current implementation with a manually created overlay that would encompass a designated area.
 
 
 ### Tina ###
