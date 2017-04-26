@@ -4,7 +4,10 @@ var defaultCenter;
 var marker;
 var icon = "/images/test_ferret.png";
 var heatmap;
+var GeoMarker;
+var errorCircle;
 
+//require('./geolocation-marker.js')
 
 function initMap() {
   // Default centered location (Student Health and Wellness Center)
@@ -15,6 +18,12 @@ function initMap() {
     zoom: 18, // default zoom level
     center: defaultCenter
   });
+
+  /*
+  // Location + radius *currently broken
+  GeoMarker = new GeolocationMarker();
+  GeoMarker.setCircleOptions({fillColor: '#808080'});
+  */
 
   // Patterened tile overlay
   map.overlayMapTypes.insertAt(
@@ -47,10 +56,11 @@ function initMap() {
       // Print to console the coordinates of the current location
       console.log("lat=" + pos.lat + ", lng=" + pos.lng);
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      infoWindow.open(map);
+      //infoWindow.setPosition(pos);
+      //infoWindow.setContent('Location found.');
+      //infoWindow.open(map);
       map.setCenter(pos);
+
 
       /*map.overlayMapTypes.insertAt(
       0, new CoordMapType(new google.maps.Size(256, 256)));*/
@@ -93,6 +103,10 @@ function autoUpdate() {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
 
+    if(errorCircle != null){
+      errorCircle.setMap(null);
+    }
+
     if (marker) {
       // Marker already created - move to current location
       marker.setPosition(newPoint);
@@ -104,6 +118,19 @@ function autoUpdate() {
         map: map
       });
     }
+
+    errorCircle = new google.maps.Circle({
+      strokeColor: '#1976D2',
+      strokeOpacity: 0.8,
+      strokeWeight: 3,
+      fillColor: '#1976D2',
+      fillOpacity: 0.35,
+      map: map,
+      center: newPoint,
+      // TODO: zoom*val = radius for zoom in/out
+      radius: 100
+    })
+
 
     // Centering map in new position
     map.setPosition(newPoint);
