@@ -17,6 +17,6 @@ I started working on the "heatmap" of visited places. So far I tested that a hea
 
 
 # Screenshot #
-![screenshot](/images/SOME_IMAGE.jpg)
+![screenshot](/images/milestone5.PNG)
 
 Description of what features the screenshot is showing
