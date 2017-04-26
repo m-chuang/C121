@@ -17,7 +17,8 @@ I started working on the "heatmap" of visited places. So far I tested that a hea
 
 
 # Screenshot #
-![screenshot](/images/milestones/milestone5_new.PNG)
+![screenshot](/images/milestones/milestone5.png)
 The screenshot shows our grass overlay, a ferret "marker" at a current location, and a test point for a test heatmap visualization (the red dot).
 
-
+![screenshot2](/images/milestones/milestone5_new.PNG)
+This screenshot shows the location "error" or "exploration" radius.
