@@ -166,15 +166,22 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.innerHTML = coord;
   div.style.width = this.tileSize.width + 'px';
   div.style.height = this.tileSize.height + 'px';
+  
+
+  /*div.style.width = '150' + 'mm';
+  div.style.height = '150' + 'mm';
+*/
+
   div.style.fontSize = '10';
   div.style.borderStyle = 'solid';
 
   // border properties
-  div.style.borderWidth = '1px';
+  div.style.borderWidth = '0px';
   div.style.borderColor = '#AAAAAA';
 
   // image url
   div.style.backgroundImage = "url('/images/grass_wallpaper.png')";
-  div.style.opacity = ".6"; // change opacity
+  div.style.backgroundSize = "cover";
+  div.style.opacity = ".52"; // change opacity
   return div;
 };
