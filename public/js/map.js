@@ -16,7 +16,9 @@ function initMap() {
   // Initialize the map
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18, // default zoom level
-    center: defaultCenter
+    center: defaultCenter,
+    maxZoom: 18,
+    minZoom: 16,
   });
 
   /*
@@ -133,7 +135,7 @@ function autoUpdate() {
 
 
     // Centering map in new position
-    map.setPosition(newPoint);
+    map.setCenter(newPoint);
   });
 
   // Calling autoUpdate every second
@@ -167,10 +169,11 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.style.width = this.tileSize.width + 'px';
   div.style.height = this.tileSize.height + 'px';
   
+  
 
   /*div.style.width = '150' + 'mm';
   div.style.height = '150' + 'mm';
-*/
+  */
 
   /* 0 font-size so coordinates disappear*/
   div.style.fontSize = '0';
@@ -180,9 +183,14 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.style.borderWidth = '0px';
   div.style.borderColor = '#AAAAAA';
 
+  if( Math.floor((Math.random() * 10) + 1) % 2 == 0 ){
+    return div;
+  }
+   
   // image url
   div.style.backgroundImage = "url('/images/grass_wallpaper.png')";
-  div.style.backgroundSize = "cover";
+  div.style.backgroundSize = "100%";
   div.style.opacity = ".52"; // change opacity
+  
   return div;
 };
