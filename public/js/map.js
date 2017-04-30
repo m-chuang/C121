@@ -172,7 +172,8 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.style.height = '150' + 'mm';
 */
 
-  div.style.fontSize = '10';
+  /* 0 font-size so coordinates disappear*/
+  div.style.fontSize = '0';
   div.style.borderStyle = 'solid';
 
   // border properties
