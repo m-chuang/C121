@@ -6,6 +6,40 @@ var icon = "/images/test_ferret.png";
 var heatmap;
 var GeoMarker;
 var errorCircle;
+var center;
+
+function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Return to Current Location';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function() {
+          map.setCenter(center);
+        });
+
+}
+
 
 //require('./geolocation-marker.js')
 
@@ -18,7 +52,7 @@ function initMap() {
     zoom: 18, // default zoom level
     center: defaultCenter,
     maxZoom: 18,
-    minZoom: 16,
+    minZoom: 18,
   });
 
   /*
@@ -62,6 +96,7 @@ function initMap() {
       //infoWindow.setContent('Location found.');
       //infoWindow.open(map);
       map.setCenter(pos);
+      center = pos;
 
 
       /*map.overlayMapTypes.insertAt(
@@ -86,6 +121,12 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+
+  var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, map);
+
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 }
 
 
@@ -149,6 +190,16 @@ autoUpdate();
 function getPoints() {
   return [
     new google.maps.LatLng(32.8796116,-117.2358329),
+    new google.maps.LatLng(32.8818006,-117.2335235),
+    new google.maps.LatLng(32.8818006,-117.2335235),
+    new google.maps.LatLng(32.8917558,-117.241156),
+    new google.maps.LatLng(32.878178205413782,-117.237203613930447),
+    new google.maps.LatLng(32.8747486,-117.242025799999979),
+    new google.maps.LatLng(32.8747486,-117.242025799999979),
+    new google.maps.LatLng(32.879713,-117.2365667),
+    new google.maps.LatLng(32.8917558,-117.241156),
+    new google.maps.LatLng(32.8841462,-117.2428555),
+    new google.maps.LatLng(32.8832821,-117.2387677),
   ];
 }
 
