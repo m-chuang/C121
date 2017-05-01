@@ -7,6 +7,7 @@ var heatmap;
 var GeoMarker;
 var errorCircle;
 var center;
+var zoomLevel;
 
 function CenterControl(controlDiv, map) {
 
@@ -52,7 +53,7 @@ function initMap() {
     zoom: 18, // default zoom level
     center: defaultCenter,
     maxZoom: 18,
-    minZoom: 18,
+    minZoom: 17,
   });
 
   /*
@@ -162,6 +163,9 @@ function autoUpdate() {
       });
     }
 
+    zoomLevel = map.getZoom();
+    radiusVal = zoomLevel*6;
+
     errorCircle = new google.maps.Circle({
       strokeColor: '#1976D2',
       strokeOpacity: 0.8,
@@ -171,13 +175,12 @@ function autoUpdate() {
       map: map,
       center: newPoint,
       // TODO: zoom*val = radius for zoom in/out
-      radius: 100
+      radius: radiusVal
     })
 
 
     // Centering map in new position
     //map.setCenter(newPoint);
-    
   });
 
   // Calling autoUpdate every second
