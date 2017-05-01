@@ -135,7 +135,8 @@ function autoUpdate() {
 
 
     // Centering map in new position
-    map.setCenter(newPoint);
+    //map.setCenter(newPoint);
+    
   });
 
   // Calling autoUpdate every second
