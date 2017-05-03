@@ -1,0 +1,21 @@
+/* page defaults */
+html,body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Avatar container */
+#avatar {
+	height: 50%;
+	width: 100%;
+	background-color: green;
+}
+
+/* Inventory container */
+#inventory {
+	height: 50%;
+	width: 100%;
+	background-color: orange;
+	/*margin-top: 50%;*/
+}
