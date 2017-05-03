@@ -10,12 +10,24 @@
     <h3>Avatar Customization</h3>
 
     <!-- Avatar container -->
-    <div id="avatar">test</div>
+    <div id="avatarContainer">
+      <!-- Avatar image -->
+      <img src="/images/test_ferret.png" id="avatarBase">
+    </div>
+
+    <!-- Inventory tabs -->
+    <div class="inventoryTabs">
+      <div class="tab" id="tab0" onclick="selectTab(0)">Hats</div>
+      <div class="tab" id="tab1" onclick="selectTab(1)">Tops</div>
+      <div class="tab" id="tab2" onclick="selectTab(2)">Shoes</div>
+    </div>
 
     <!-- Inventory container -->
-    <div id="inventory">hi</div>
+    <div id="inventoryContent">
+    </div>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery.js"></script>
     <script src="/js/avatar.js"></script>
   </body>
 </html>

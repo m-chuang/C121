@@ -6,16 +6,41 @@ html,body{
 }
 
 /* Avatar container */
-#avatar {
-	height: 50%;
+#avatarContainer {
+	height: 40%;
 	width: 100%;
-	background-color: green;
+	position: relative;
+	/*background-color: green;*/
+}
+
+/* center the avatar in the container */
+#avatarBase {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+/* Inventory tab container */
+.inventoryTabs {
+	display: table;
+}
+.tab {
+	width: 75px;
+	display: table-cell;
+	padding: 15px;
+	text-align: center;
+	border-radius: 10px 10px 0 0;
+}
+.tab:hover {
+     cursor: pointer;
 }
 
 /* Inventory container */
-#inventory {
-	height: 50%;
-	width: 100%;
+#inventoryContent {
+	padding: 25px;
 	background-color: orange;
-	/*margin-top: 50%;*/
 }
+
