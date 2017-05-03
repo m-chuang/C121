@@ -25,3 +25,5 @@ The implementation of the login page is complete. The user can login if they hav
 ![screenshot](/images/milestones/milestone7_signuppage.PNG)
 The implementation of the sign up page is complete. The user can create an account with their email and password. The passwords must match in order for the user to be able to create an account. Otherwise, an error message will be displayed.
 
+![screenshot](/public/images/FerretAvatar.svg)
+This is the current design of the Ferret Avatar. Users will be able to customize their ferret, once they collect items from exploring their world.
