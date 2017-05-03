@@ -51,7 +51,7 @@ function initMap() {
 
   // Initialize the map
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 18, // default zoom level
+    zoom: 17, // default zoom level
     center: defaultCenter,
     maxZoom: 18,
     minZoom: 17,
@@ -63,9 +63,9 @@ function initMap() {
   GeoMarker.setCircleOptions({fillColor: '#808080'});
   */
 
-  // Patterened tile overlay
-  map.overlayMapTypes.insertAt(
-    0, new CoordMapType(new google.maps.Size(256, 256)));
+  // SCOTT
+  
+  // END - SCOTT
 
   // Initialize the heatmap
   heatmap = new google.maps.visualization.HeatmapLayer({
@@ -103,18 +103,34 @@ function initMap() {
 
       /*map.overlayMapTypes.insertAt(
       0, new CoordMapType(new google.maps.Size(256, 256)));*/
-/*      var imageBounds = {
-    		north: pos.lat + .0003,
-    		south: pos.lat - .0003,
-    		east:  pos.lng + .0003,
-    		west:  pos.lng - .0003
-  	};
+      var imageBounds = {
+    		north: pos.lat + .0005,
+    		south: pos.lat - .0005,
+    		east:  pos.lng + .0005,
+    		west:  pos.lng - .0005
+  	}
 
   historicalOverlay = new google.maps.GroundOverlay(
       'https://people.ucsc.edu/~kiqnguye/grass_wallpaper.png',
       imageBounds);
   historicalOverlay.setMap(map);
-*/
+  for( var i = -117.2474971 ; i < -117.215 ; i+=.001 )
+    {
+      for( var j = 32.8924328; j > 32.8724328 ; j-=.001){
+        imageBounds = {
+          north: j,
+          south: j - .001,
+          east:  i + .001,
+          west:  i
+        };
+        historicalOverlay = new google.maps.GroundOverlay(
+            'https://people.ucsc.edu/~kiqnguye/grass_wallpaper.png',
+            imageBounds);
+        historicalOverlay.setMap(map);
+      }
+    }
+
+    
   }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -249,38 +265,3 @@ function getPoints() {
 // topRightY = the bottom right Y coordinate
 function tileOverlay(topLeftX,topLeftY,bottomRightX,bottomRightY){
 }
-// Tile overlay pattern
-function CoordMapType(tileSize) {
-  this.tileSize = tileSize;
-}
-CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
-  var div = ownerDocument.createElement('div');
-  div.innerHTML = coord;
-  div.style.width = this.tileSize.width + 'px';
-  div.style.height = this.tileSize.height + 'px';
-  
-  
-
-  /*div.style.width = '150' + 'mm';
-  div.style.height = '150' + 'mm';
-  */
-
-  /* 0 font-size so coordinates disappear*/
-  div.style.fontSize = '0';
-  div.style.borderStyle = 'solid';
-
-  // border properties
-  div.style.borderWidth = '0px';
-  div.style.borderColor = '#AAAAAA';
-
-  if( Math.floor((Math.random() * 10) + 1) % 2 == 0 ){
-    return div;
-  }
-   
-  // image url
-  div.style.backgroundImage = "url('/images/grass_wallpaper.png')";
-  div.style.backgroundSize = "100%";
-  div.style.opacity = ".52"; // change opacity
-  
-  return div;
-};
