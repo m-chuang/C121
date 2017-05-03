@@ -1,31 +1,116 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  	<meta charset="utf-8">
-  	<title>Ferret</title>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="/favicon.ico" rel="icon">
 
-    <link href="/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    
-    <!-- LINKING TO FIREBASE -->
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 90%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-  </head>
 
-  <body>
-    <!-- <h3>Ferret</h3> -->
-    <div id="nav">
-      <b><a href=".">Menu</a></b>
-      <b><button id="lg_signout">Sign Out</button></b>
-    </div>
-    
-    
+    <title>Ferret</title>
 
-    <!-- Map container -->
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/hovereffect.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+    type="text/css">
+    <link href=
+    'https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'>
+    <link href=
+    'https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+    rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button aria-expanded="false" class=
+                    "navbar-toggle collapsed" data-target=
+                    "#bs-example-navbar-collapse-1" data-toggle="collapse"
+                    type="button"><span class="sr-only">Toggle
+                    navigation</span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> <span class=
+                    "icon-bar"></span></button> <a class="navbar-brand" href=
+                    "/index">Ferret</a>
+                </div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <nav class="navbar navbar-default navbar-fixed-top" id="mainNav">
+                <div class="container-fluid">
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button class="navbar-toggle collapsed" data-target=
+                        "#bs-example-navbar-collapse-1" data-toggle="collapse"
+                        type="button"><span class="sr-only">Toggle
+                        navigation</span> Menu <i class=
+                        "fa fa-bars"></i></button> <a class=
+                        "navbar-brand page-scroll" href="/index">Ferret</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id=
+                    "bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href=""><b>Quests</b></a>
+                            </li>
+                            <li>
+                                <a href=""><b>Inventory</b></a>
+                            </li>
+                            <li>
+                                <a href=""><b>Stats</b></a>
+                            </li>
+                            <li>
+                                <a href=""><b>Help</b></a>
+                            </li>
+                            <li>
+                                <a href="" id="lg_signout"><b>Sign Out</b></a>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </nav>
+    </div><!-- /.container-fluid -->
+
+    <!-- END HEADER -->
+
     <div id="map"></div>
 
-    <!-- Scripts -->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSeT5rOlsjBJr1kBi0heKYx2qHq_EnjXM&libraries=visualization&callback=initMap"></script>
     <script src="/js/map.js"></script>
-  </body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+    </script> 
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js">
+    </script>
+</body>
 </html>

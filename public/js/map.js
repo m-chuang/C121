@@ -51,7 +51,7 @@ function initMap() {
 
   // Initialize the map
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 17, // default zoom level
+    zoom: 18, // default zoom level
     center: defaultCenter,
     maxZoom: 18,
     minZoom: 17,
@@ -164,7 +164,7 @@ function initFirebase() {
   firebase.initializeApp(config);
 
    // FIREBASE
-  const lg_singout = document.getElementById('lg_signout');
+  const lg_signout = document.getElementById('lg_signout');
 
   lg_signout.addEventListener('click', e => {
     firebase.auth().signOut();
