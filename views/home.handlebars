@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<title>Ferret</title>
+
+    <link href="/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    
+    <!-- LINKING TO FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  </head>
+
+  <body>
+    <!-- <h3>Ferret</h3> -->
+    <div id="nav">
+      <b><a href=".">Menu</a></b>
+      <b><button id="lg_signout">Sign Out</button></b>
+    </div>
+    
+    
+
+    <!-- Map container -->
+    <div id="map"></div>
+
+    <!-- Scripts -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSeT5rOlsjBJr1kBi0heKYx2qHq_EnjXM&libraries=visualization&callback=initMap"></script>
+    <script src="/js/map.js"></script>
+  </body>
+</html>

@@ -14,21 +14,12 @@
   </head>
 
   <body>
-     <!-- <div>
-
-        <form class="form-login">
-          <input type="text" class="form-input-email" placeholder="Email Address"></input>
-          <input type="password" class="input-block-level" placeholder="Password"></input>
-          <a href="login"><button type="submit">Login</button></a>
-        </form> 
-        
-      </div> -->
+  
     <link rel="stylesheet" href="/css/login.css">
     <!-- FONT -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
@@ -49,21 +40,20 @@
                 <label for="lg_password" class="sr-only">Password</label>
                 <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
               </div>
-              <!-- **** Not to implement -maybe later ****
-              <div class="form-group login-group-checkbox">
-                <input type="checkbox" id="lg_remember" name="lg_remember">
-                <label for="lg_remember">remember</label>
+              <div class="form-group">
+                <label for="lg_password_confirm" class="sr-only">Confirm Password</label>
+                <input type="password" class="form-control" id="lg_password_confirm" name="lg_password" placeholder="confirm password">
               </div>
-              -->
+
             </div>
-            <button type="submit" class="login-button" id="lg_button">Login</button>
+            <p class="requirement">
+              password must be at least 6 characters
+            </p>
+            <p id="message"></p>
+            <button type="submit" class="login-button" id="lg_button_signup">Sign Up</button>
+            
           </div>
-          <!-- **** TODO later - leave here for now **** -->
-          <div class="etc-login-form">
-            <p>forgot your password? <a href="#">click here</a></p>
-            <p>new user? <a href="signup" id="lg_signup">create new account</a></p>
-          </div>
-          <p id="message"></p>
+
         </div>
       </div>
         <!-- end:Main Form -->
