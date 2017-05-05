@@ -257,11 +257,17 @@ function getPoints() {
   ];
 }
 
-
-// Function to calculate how many tiles needed to overlay, then goes and does it.
-// topLeftX = the top left X coordinate
-// topLeftY = the top right Y coordinate
-// topRightX = the bottom right X coordinate
-// topRightY = the bottom right Y coordinate
-function tileOverlay(topLeftX,topLeftY,bottomRightX,bottomRightY){
+function generateRandomPoints(){
+	var randomPoints = [];
+	for( var i = 0; i < 1000; i++){
+		randomPoints.push(new google.maps.LatLng(randomIntFromInterval(32,33),randomIntFromInterval(-118,-117)));
+	}
+	return randomPoints;
 }
+
+function randomIntFromInterval(min,max)
+{
+    return Math.random()*(max-min+1)+min;
+}
+
+
