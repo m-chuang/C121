@@ -2,7 +2,7 @@
 var map;
 var defaultCenter;
 var marker;
-var icon = "/images/test_ferret.png";
+var icon = "/images/ferret0.png";
 var heatmap;
 var GeoMarker;
 var errorCircle;
@@ -63,20 +63,20 @@ function initMap() {
   GeoMarker.setCircleOptions({fillColor: '#808080'});
   */
 
-  // SCOTT
-  
-  // END - SCOTT
-
-  // Initialize the heatmap
+  // Initialize the HEATMAP
   heatmap = new google.maps.visualization.HeatmapLayer({
-    data: getPoints(),
+    //data: getPoints(),
+    data: generateRandomPoints(), // ARRAY OF POINTS TO LOAD
     map: map
   });
+  changeGradient();
+  changeOpacity();
+  changeRadius();
 
-  // Default location marker (red)
+  // Default location marker
   marker = new google.maps.Marker({
     position: defaultCenter,
-    icon: '/images/test_ferret.png',
+    icon: icon,
     map: map
   });
 
@@ -92,7 +92,7 @@ function initMap() {
       };
 
       // Print to console the coordinates of the current location
-      console.log("lat=" + pos.lat + ", lng=" + pos.lng);
+      console.log("curr lat=" + pos.lat + ", lng=" + pos.lng);
 
       //infoWindow.setPosition(pos);
       //infoWindow.setContent('Location found.');
@@ -103,14 +103,14 @@ function initMap() {
 
       /*map.overlayMapTypes.insertAt(
       0, new CoordMapType(new google.maps.Size(256, 256)));*/
-      var imageBounds = {
+      /*var imageBounds = {
     		north: pos.lat + .0005,
     		south: pos.lat - .0005,
     		east:  pos.lng + .0005,
     		west:  pos.lng - .0005
-  	}
+  	  }*.
 
-  historicalOverlay = new google.maps.GroundOverlay(
+  /*historicalOverlay = new google.maps.GroundOverlay(
       'https://people.ucsc.edu/~kiqnguye/grass_wallpaper.png',
       imageBounds);
   historicalOverlay.setMap(map);
@@ -126,9 +126,9 @@ function initMap() {
         historicalOverlay = new google.maps.GroundOverlay(
             'https://people.ucsc.edu/~kiqnguye/grass_wallpaper.png',
             imageBounds);
-        historicalOverlay.setMap(map);
+        //historicalOverlay.setMap(map);
       }
-    }
+    }*/
 
     
   }, function() {
@@ -209,7 +209,7 @@ function autoUpdate() {
     else {
       marker = new google.maps.Marker({
         position: newPoint,
-        icon: '/images/test_ferret.png',
+        icon: icon,
         map: map
       });
     }
@@ -240,9 +240,9 @@ function autoUpdate() {
 autoUpdate();
 
 
-// Get map data points (used for the Heatmap)
+// Get sample map data points (used for the Heatmap)
 function getPoints() {
-  return [
+  var pointsArr = [
     new google.maps.LatLng(32.8796116,-117.2358329),
     new google.maps.LatLng(32.8818006,-117.2335235),
     new google.maps.LatLng(32.8818006,-117.2335235),
@@ -255,19 +255,58 @@ function getPoints() {
     new google.maps.LatLng(32.8841462,-117.2428555),
     new google.maps.LatLng(32.8832821,-117.2387677),
   ];
+  console.log(pointsArr);
+  return pointsArr;
 }
 
+// generate random points as sample data
 function generateRandomPoints(){
 	var randomPoints = [];
 	for( var i = 0; i < 1000; i++){
-		randomPoints.push(new google.maps.LatLng(randomIntFromInterval(32,33),randomIntFromInterval(-118,-117)));
+    var lat = 32.87 + randomIntFromInterval(0,1);
+    var lng = -117.24  +randomIntFromInterval(0,1);
+    console.log("LAT:" + lat + " LNG:" + lng);  
+		randomPoints.push(new google.maps.LatLng(lat,lng));
+    randomPoints.push(new google.maps.LatLng(lat,lng));
+    randomPoints.push(new google.maps.LatLng(lat,lng));
 	}
+  console.log(randomPoints);
 	return randomPoints;
 }
 
+// helper for generating a random number
 function randomIntFromInterval(min,max)
 {
-    return Math.random()*(max-min+1)+min;
+   return Math.random()/100;
 }
 
+// change the gradient of the heatmap to a "reverse" heatmap
+function changeGradient() {
+  var gradient = [
+    'rgba(49, 197, 57, 1)', // default green overlay
+    'rgba(24, 181, 74, 0.8)',
+    'rgba(24, 181, 74, 0.6)',
+    'rgba(24, 181, 74, 0.4)',
+    'rgba(24, 181, 74, 0.2)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(49, 197, 57, 0)',
+    'rgba(255, 255, 255, 0)' // clear
+  ]
+  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+}
 
+// change the opacity of the whole heatmap
+function changeOpacity() {
+  heatmap.set('opacity', heatmap.get('opacity') ? null : 0.55);
+}
+
+// change the radius of a heatmap point
+function changeRadius() {
+  heatmap.set('radius', heatmap.get('radius') ? null : 15);
+}
