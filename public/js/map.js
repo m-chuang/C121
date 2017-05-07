@@ -40,7 +40,14 @@ function initMap() {
   changeGradient();
   changeOpacity();
   changeRadius();
-
+  
+  // FERRET IMAGE PROPERTIES
+  icon = {
+    url: "/images/ferret0.png",
+    scaledSize: new google.maps.Size(100, 50), // scaled smaller
+    origin: new google.maps.Point(0, 0),
+    //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
+  };
 
   // CURRENT LOCATION MARKER INITIALIZATION
   marker = new google.maps.Marker({
@@ -310,5 +317,5 @@ function changeOpacity() {
 
 // CHANGE RADIUS OF HEATMAP POINTS
 function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 15);
+  heatmap.set('radius', heatmap.get('radius') ? null : 50);
 }
