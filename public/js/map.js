@@ -53,6 +53,8 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18, // default zoom level
     center: defaultCenter,
+    disableDefaultUI: true,
+    draggable: false,
     maxZoom: 18,
     minZoom: 17,
   });
