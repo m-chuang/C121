@@ -1,4 +1,4 @@
-// Shared variables
+// SHARED VARIABLES
 var map;
 var defaultCenter;
 var marker;
@@ -9,83 +9,80 @@ var errorCircle;
 var center;
 var zoomLevel;
 
-
+//////////////////// CENTER AT LOCATION CONTROLS ////////////////////
 function CenterControl(controlDiv, map) {
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
 
-        // Set CSS for the control border.
-        var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#fff';
-        controlUI.style.border = '2px solid #fff';
-        controlUI.style.borderRadius = '3px';
-        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI.style.cursor = 'pointer';
-        controlUI.style.marginBottom = '22px';
-        controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to recenter the map';
-        controlDiv.appendChild(controlUI);
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = 'Center at Current Location';
+  controlUI.appendChild(controlText);
 
-        // Set CSS for the control interior.
-        var controlText = document.createElement('div');
-        controlText.style.color = 'rgb(25,25,25)';
-        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText.style.fontSize = '16px';
-        controlText.style.lineHeight = '38px';
-        controlText.style.paddingLeft = '5px';
-        controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 'Return to Current Location';
-        controlUI.appendChild(controlText);
-
-        // Setup the click event listeners: simply set the map to Chicago.
-        controlUI.addEventListener('click', function() {
-          map.setCenter(center);
-        });
-
+  // Setup the click event listeners.
+  controlUI.addEventListener('click', function() {
+    map.setCenter(center);
+  });
 }
 
 
-//require('./geolocation-marker.js')
-
+//////////////////// MAP INITIALIZATION ////////////////////
 function initMap() {
-  // Default centered location (Student Health and Wellness Center)
+  // DEFAULT CENTER (Student Health and Wellness Center)
   defaultCenter = {lat: 32.879425, lng: -117.238037};
 
-  // Initialize the map
+
+  // MAP INITIALIZATION
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 18, // default zoom level
-    center: defaultCenter,
-    disableDefaultUI: true,
-    draggable: false,
-    maxZoom: 18,
-    minZoom: 17,
+    zoom: 18,                   // default zoom level
+    center: defaultCenter,      
+    disableDefaultUI: true,     // disable UI buttons
+    draggable: true,            // DEBUG: set to true
+    maxZoom: 18,                
+    minZoom: 1,                 // DEBUG: change to 1
   });
 
-  /*
-  // Location + radius *currently broken
-  GeoMarker = new GeolocationMarker();
-  GeoMarker.setCircleOptions({fillColor: '#808080'});
-  */
 
-  // Initialize the HEATMAP
+  // HEATMAP INITIALIZATION
   heatmap = new google.maps.visualization.HeatmapLayer({
     //data: getPoints(),
     data: generateRandomPoints(), // ARRAY OF POINTS TO LOAD
     map: map
   });
+
   changeGradient();
   changeOpacity();
   changeRadius();
 
-  // Default location marker
+
+  // CURRENT LOCATION MARKER INITIALIZATION
   marker = new google.maps.Marker({
     position: defaultCenter,
     icon: icon,
     map: map
   });
 
-  infoWindow = new google.maps.InfoWindow;
 
-  // Get current location
-  // Try HTML5 geolocation.
+  // CREATE INFOWINDOW FOR ITEMS
+  var infowindow = new google.maps.InfoWindow();
+
+
+  // GET CURRENT LOCATION
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -96,41 +93,38 @@ function initMap() {
       // Print to console the coordinates of the current location
       console.log("curr lat=" + pos.lat + ", lng=" + pos.lng);
 
-      //infoWindow.setPosition(pos);
-      //infoWindow.setContent('Location found.');
-      //infoWindow.open(map);
+      // Center map at current location
       map.setCenter(pos);
       center = pos;
 
 
-      /*map.overlayMapTypes.insertAt(
-      0, new CoordMapType(new google.maps.Size(256, 256)));*/
-      /*var imageBounds = {
-    		north: pos.lat + .0005,
-    		south: pos.lat - .0005,
-    		east:  pos.lng + .0005,
-    		west:  pos.lng - .0005
-  	  }*.
 
-  /*historicalOverlay = new google.maps.GroundOverlay(
-      'https://people.ucsc.edu/~kiqnguye/grass_wallpaper.png',
-      imageBounds);
-  historicalOverlay.setMap(map);
-  for( var i = -117.2474971 ; i < -117.215 ; i+=.001 )
-    {
-      for( var j = 32.8924328; j > 32.8724328 ; j-=.001){
-        imageBounds = {
-          north: j,
-          south: j - .001,
-          east:  i + .001,
-          west:  i
-        };
-        historicalOverlay = new google.maps.GroundOverlay(
-            'https://people.ucsc.edu/~kiqnguye/grass_wallpaper.png',
-            imageBounds);
-        //historicalOverlay.setMap(map);
-      }
-    }*/
+
+
+
+
+
+
+
+
+
+
+
+      ////////////////////// WIP /////////////////////
+
+
+      map.data.loadGeoJson('https://gist.githubusercontent.com/m-chuang/b65045add0fbf8e537b654a7d383940f/raw/db46c483c82a76dd1d5d2416211d03a74fef1f87/map.geojson');
+
+      map.data.addListener('click', function(event) {
+        infowindow.setContent(event.feature.getProperty('name')+"<br>"+event.feature.getProperty('description'));
+        infowindow.setPosition(event.latLng);
+        infowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
+        infowindow.open(map);
+      });
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+      ////////////////////// WIP /////////////////////
 
     
   }, function() {
@@ -142,16 +136,25 @@ function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
 
+
+
   var centerControlDiv = document.createElement('div');
   var centerControl = new CenterControl(centerControlDiv, map);
 
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 
- initFirebase();
-
-
+  initFirebase();
 }
+
+
+
+
+
+
+
+
+
 
 function initFirebase() {
 
