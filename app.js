@@ -12,6 +12,9 @@ var index = require('./routes/index');
 var home = require('./routes/home');
 var signup = require('./routes/signup');
 var avatar = require('./routes/avatar');
+var quests = require('./routes/quests');
+var stats = require('./routes/stats');
+var help = require('./routes/help');
 // Example route
 // var user = require('./routes/user');
 
@@ -41,6 +44,9 @@ app.get('/', index.view);
 app.get('/home', home.view);
 app.get('/signup', signup.view);
 app.get('/avatar', avatar.view);
+app.get('/quests', quests.view);
+app.get('/stats', stats.view);
+app.get('/help', help.view);
 // Example route
 // app.get('/users', user.list);
 
