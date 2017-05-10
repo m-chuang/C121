@@ -26,7 +26,7 @@ function initMap() {
     center: defaultCenter,      // center map at default location
     disableDefaultUI: true,     // disable UI buttons
     clickableIcons: false,      // disable default Google POIs
-    draggable: true,            // DEBUG: set to true
+    draggable: false,            // DEBUG: set to true
     maxZoom: 18,                // DO NOT CHANGE
     minZoom: 18,                // DEBUG: change to 1
   });
@@ -88,7 +88,7 @@ function initMap() {
   var infowindow = new google.maps.InfoWindow();
 
   // ITEM HANDLING
-  map.data.loadGeoJson('https://gist.githubusercontent.com/m-chuang/b65045add0fbf8e537b654a7d383940f/raw/ead7ba419bc819175cb35fe52f3ef4e87df2275e/map.geojson');
+  map.data.loadGeoJson('https://gist.githubusercontent.com/m-chuang/b65045add0fbf8e537b654a7d383940f/raw/bd352f28714d7d3d41666f7683a46ea51f1bed72/map.geojson');
 
   map.data.addListener('click', function(event) {
     infowindow.setPosition(event.latLng);
