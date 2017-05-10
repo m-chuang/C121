@@ -23,6 +23,9 @@ html,body{
 	margin: auto;
 }
 
+
+/* OLD STYLING FOR TABS */
+
 /* Inventory tab container */
 .inventoryTabs {
 	display: table;
