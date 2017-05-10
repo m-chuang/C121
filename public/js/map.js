@@ -90,6 +90,13 @@ function initMap() {
       ////////////////////// WIP /////////////////////
 
 
+
+
+
+
+
+
+
       map.data.loadGeoJson('https://gist.githubusercontent.com/m-chuang/b65045add0fbf8e537b654a7d383940f/raw/db46c483c82a76dd1d5d2416211d03a74fef1f87/map.geojson');
 
       map.data.addListener('click', function(event) {
@@ -100,6 +107,15 @@ function initMap() {
       });
 
       google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+
+
+
+
+
 
       ////////////////////// WIP /////////////////////    
 
@@ -132,6 +148,13 @@ function initMap() {
 
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
+
+
+  // RECENTER MAP ON WINDOW RESIZE
+  google.maps.event.addDomListener(window, "resize", function() {
+      google.maps.event.trigger(map, "resize");
+      map.setCenter(center);
+  });
 
 
   // INITIALIZE FIREBASE
