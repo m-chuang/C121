@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -8,57 +9,41 @@
 
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 
-    <title>Ferret - Avatar</title>
+    <title>Ferret</title>
 
+    <!-- Avatar Page CSS -->
     <link href="/css/avatar.css" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/hovereffect.css" rel="stylesheet">
-
-    <link href=
-    'https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-    rel='stylesheet' type='text/css'>
-    <link href=
-    'https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
-    rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 </head>
 
+
 <body>
-    <div>
+    <div id="navbar">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-
+                
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button aria-expanded="false" class=
-                    "navbar-toggle collapsed" data-target=
-                    "#bs-example-navbar-collapse-1" data-toggle="collapse"
-                    type="button"><span class="sr-only">Toggle
-                    navigation</span> <span class="icon-bar"></span>
-                    <span class="icon-bar"></span> <span class=
-                    "icon-bar"></span></button> <a class="navbar-brand" href=
-                    "/home">Ferret</a>
+                    <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle Navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="/home">Ferret</a>
                 </div>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <nav class="navbar navbar-default navbar-fixed-top" id="mainNav">
                 <div class="container-fluid">
-
+                    
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button class="navbar-toggle collapsed" data-target=
-                        "#bs-example-navbar-collapse-1" data-toggle="collapse"
-                        type="button"><span class="sr-only">Toggle
-                        navigation</span> Menu <i class=
-                        "fa fa-bars"></i></button> <a class=
-                        "navbar-brand page-scroll" href="/home">Ferret</a>
+                        <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle Navigation</span> Menu <i class="fa fa-bars"></i></button> <a class="navbar-brand page-scroll" href="/home">Ferret</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id=
-                    "bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="/home"><b>Map</b></a>
@@ -88,22 +73,147 @@
     <!-- END HEADER -->
 
 
+    <!-- START CONTENT CONTAINER HERE -->
+
     <!-- Avatar container -->
     <div id="avatarContainer">
-      <!-- Avatar image -->
-      <img src="/images/ferret0.png" id="avatarBase">
-    </div>
+
+    <!-- Avatar image -->
+    <img src="/images/ferret0.png" id="avatarBase"></div>
+
+
+    <!-- OLD TAB CONTAINERS -->
 
     <!-- Inventory tabs -->
-    <div class="inventoryTabs">
+    <!--  <div class="inventoryTabs">
       <div class="tab" id="tab0" onclick="selectTab(0)">Hats</div>
       <div class="tab" id="tab1" onclick="selectTab(1)">Tops</div>
       <div class="tab" id="tab2" onclick="selectTab(2)">Shoes</div>
-    </div>
+    </div> -->
 
     <!-- Inventory container -->
-    <div id="inventoryContent">
+    <!-- <div id="inventoryContent"></div> -->
+
+
+    <!-- NEW TAB CONTAINERS -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="tabbable-panel">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab"> All </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab"> Hats </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_3" data-toggle="tab"> Tops </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_4" data-toggle="tab"> Shoes </a>
+                            </li>                            
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_default_1">
+                                <div class="row">
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_default_2">
+                                <div class="row">
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_default_3">
+                                <div class="row">
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_default_4">
+                                <div class="row">
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                  <div class="col-xs-4 col-sm-2">
+                                      <a href=""><img src="/images/item-default.jpg"></img></a>
+                                  </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- END CONTENT CONTAINER HERE -->
 
 
     <!-- JavsScript -->
