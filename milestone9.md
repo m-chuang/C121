@@ -14,9 +14,12 @@ For this milestone, I helped write a function that could randomly generate locat
 
 # Screenshot #
 ![screenshot](/public/images/Ferret%20Avatar/Hats/PropellerHat.png/)
+
 This is the png version of the item Propeller Hat that users can customize their ferret with.
 ![screenshot](public/images/Ferret%20Avatar/Shoes/RedSneakers.png)
+
 This is the png version of the item Red Sneakers that users can customize their ferret with.
+
 ![screenshot](/images/milestones/milestone9_infowindow.png)
 This is a screenshot of an item marker and its window when opened. This is a new feature that has been added since Milestone 7. 
 ![screenshot](/images/milestones/milestone9_quests.png)
