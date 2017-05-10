@@ -23,11 +23,12 @@ function initMap() {
   // MAP INITIALIZATION
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18,                   // default zoom level
-    center: defaultCenter,      
+    center: defaultCenter,      // center map at default location
     disableDefaultUI: true,     // disable UI buttons
+    clickableIcons: false,      // disable default Google POIs
     draggable: true,            // DEBUG: set to true
-    maxZoom: 18,                
-    minZoom: 1,                 // DEBUG: change to 1
+    maxZoom: 18,                // DO NOT CHANGE
+    minZoom: 18,                // DEBUG: change to 1
   });
 
 
@@ -49,16 +50,12 @@ function initMap() {
     //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
   };
 
-  // CURRENT LOCATION MARKER INITIALIZATION
+  // CURRENT LOCATION MARKER INITIALIZATION (FERRET IMAGE)
   marker = new google.maps.Marker({
     position: defaultCenter,
     icon: icon,
     map: map
   });
-
-
-  // CREATE INFOWINDOW FOR ITEMS
-  var infowindow = new google.maps.InfoWindow();
 
 
   // GET CURRENT LOCATION
@@ -76,70 +73,34 @@ function initMap() {
       map.setCenter(pos);
       center = pos;
 
-
-
-
-
-
-
-
-
-
-
-
-      ////////////////////// WIP /////////////////////
-
-
-
-
-
-
-
-
-
-      map.data.loadGeoJson('https://gist.githubusercontent.com/m-chuang/b65045add0fbf8e537b654a7d383940f/raw/db46c483c82a76dd1d5d2416211d03a74fef1f87/map.geojson');
-
-      map.data.addListener('click', function(event) {
-        infowindow.setContent(event.feature.getProperty('name')+"<br>"+event.feature.getProperty('description'));
-        infowindow.setPosition(event.latLng);
-        infowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
-        infowindow.open(map);
-      });
-
-      google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-
-
-
-
-
-
-
-      ////////////////////// WIP /////////////////////    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   	}, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-  } else {
+  } 
+  else {
   	  // Center at default location
       map.setCenter(defaultCenter);
       handleLocationError(false, infoWindow, map.getCenter());
   }
+
+
+  // CREATE INFOWINDOW FOR ITEMS
+  var infowindow = new google.maps.InfoWindow();
+
+  // ITEM HANDLING
+  map.data.loadGeoJson('https://gist.githubusercontent.com/m-chuang/b65045add0fbf8e537b654a7d383940f/raw/ead7ba419bc819175cb35fe52f3ef4e87df2275e/map.geojson');
+
+  map.data.addListener('click', function(event) {
+    infowindow.setPosition(event.latLng);
+    infowindow.setContent(event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"<br /> <br />"+'<center><button onclick="infowindow.close();">Pick Up Item</button></center>');
+    infowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
+    infowindow.open(map);
+  });
+
+  // CLOSE ITEM INFOWINDOW ON CLICKAWAY
+  google.maps.event.addListener(map, "click", function(event) {
+      infowindow.close();
+  });
 
 
   // CREATE CENTER AT LOCATION BUTTON
@@ -290,9 +251,15 @@ function initFirebase() {
 function generateRandomPoints(){
 	var randomPoints = [];
 	for( var i = 0; i < 1000; i++){
-    var lat = 32.87 + randomIntFromInterval(0,1);
-    var lng = -117.24  +randomIntFromInterval(0,1);
-    console.log("LAT:" + lat + " LNG:" + lng);  
+
+    // ORIGINAL
+    //var lat = 32.87 + randomIntFromInterval(0,1);
+    //var lng = -117.24  +randomIntFromInterval(0,1);
+
+    // NEW
+    var lat = 32.874 + randomIntFromInterval(0,2);
+    var lng = -117.242  +randomIntFromInterval(0,2);
+    //console.log("LAT:" + lat + " LNG:" + lng);  
 		randomPoints.push(new google.maps.LatLng(lat,lng));
     randomPoints.push(new google.maps.LatLng(lat,lng));
     randomPoints.push(new google.maps.LatLng(lat,lng));
@@ -340,5 +307,5 @@ function changeOpacity() {
 
 // CHANGE RADIUS OF HEATMAP POINTS
 function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 50);
+  heatmap.set('radius', heatmap.get('radius') ? null : 75);
 }
