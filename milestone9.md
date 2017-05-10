@@ -1,7 +1,7 @@
 # Team Member Contributions #
 
 ### Ashley ###
-.
+For this milestone I added the sogn out implementation to the new pages for our app. I also looked into recording location data in firebase but I still have not found the most effective way to do it. Additionally, I updated the heatmapt to uncover current user location, but it requires to reacreate the heatmap. My goal is to find another approach that can use the same heatmap obejct.
 
 ### Michael ###
 For this milestone, I made several changes to the map interface and functionality. I disabled default UI controls as well as draggability. In addition, I loaded item markers through a custom geoJSON file for our map. Once this was complete, I updated our map homepage to take up the full screen with the navbar overlayed on top. I cleaned up our working files as well as made other UI/UX updates to the Quests (progress bar), Avatar (tab and item placeholders), and Help (FAQ) pages. I updated the map so that it would keep the user's current location centered on the page upon resize. Finally, I added additional item markers and updated their descriptions. I then added a button to the infowindows to pick up items when found.
