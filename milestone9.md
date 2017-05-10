@@ -10,7 +10,7 @@ For this milestone, I made several changes to the map interface and functionalit
 For this milestone, I helped write a function that could randomly generate location data, so we could test out our map clearing functionality. In addition, I started working on creating the items for customizing your ferret. I currently have created 5 hats and 5 shoes using Adobe Illustrator.
 
 ### Tina ###
-.
+I edited our heatmap overlay to have a gradient that makes it look like a "reverse" heatmap, where the points would appear transparent and the rest of the map would have a green overlay. I also started up handlerbars and routes to the other pages of our app (Quests, Stats, Help).
 
 # Screenshot #
 ![screenshot](/public/images/Ferret%20Avatar/Hats/PropellerHat.png/)
