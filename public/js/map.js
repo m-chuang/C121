@@ -78,8 +78,6 @@ function initMap() {
       console.log("curr lat=" + pos.lat + ", lng=" + pos.lng);
 
       // CLEAR HEATMAP AT CURRENT LOCATION (MAYBE - given it's undiscovered location)
-      curr_lat = pos.lat;
-      curr_lng = pos.lng;
       updatePoints();    
 
       // Center map at current location
@@ -146,6 +144,7 @@ function autoUpdate() {
     // LOCATION MARKER UPDATER
     if (marker) {
       marker.setPosition(newPoint);
+
     }
     else {
       marker = new google.maps.Marker({
@@ -265,7 +264,7 @@ function initFirebase() {
 function generateRandomPoints(){
   //var prevPoints= [];
   randomPoints = new google.maps.MVCArray([]);
-  for( var i = 0; i < 0; i++){
+  for( var i = 0; i < 100; i++){
 
     // ORIGINAL
     //var lat = 32.87 + randomIntFromInterval(0,1);
@@ -286,28 +285,17 @@ function generateRandomPoints(){
 //////////////////// LOCATION POINTS Updater ////////////////////
 function updatePoints(){
   var currentPoint = marker.getPosition();
-  //var point = []
-  if ((Math.abs(curr_lat - prev_lat ) > 0.003 || Math.abs(curr_lng - prev_lng) > 0.003)) { //} || (count < 3))  {
+  
+  
+  if ((Math.abs(currentPoint.lat() - prev_lat ) > 0.0001 || Math.abs(currentPoint.lng() - prev_lng) > 0.0001)) { //} || (count < 3))  {
 
     randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
-    prev_lat = curr_lat;
-    prev_lng = curr_lng;
+    prev_lat = currentPoint.lat();
+    prev_lng = currentPoint.lng();
     count = 0;
 
-    console.log(prev_lat);
+    //console.log(prev_lat);
   }
-  count++;
-  //console.log(randomPoints)
-  // HEATMAP INITIALIZATION
-  /*heatmap.setMap(null);
-  heatmap = new google.maps.visualization.HeatmapLayer({
-    data: randomPoints, // ARRAY OF POINTS TO LOAD
-    map: map
-  });
-  
-  changeGradient();
-  changeOpacity();
-  changeRadius();*/
 }
 
 
