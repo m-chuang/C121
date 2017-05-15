@@ -10,6 +10,12 @@ var center;
 var zoomLevel;
 var randomPoints;
 
+// HEATMAP AND FIREBASE - location 
+var prev_lat = 0;
+var prev_lgn = 0;
+var curr_lat;
+var curr_lgn;
+
 //////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
 autoUpdate();
 
@@ -69,6 +75,11 @@ function initMap() {
 
       // Print to console the coordinates of the current location
       console.log("curr lat=" + pos.lat + ", lng=" + pos.lng);
+
+      // CLEAR HEATMAP AT CURRENT LOCATION (MAYBE - given it's undiscovered location)
+      curr_lat = pos.lat;
+      curr_lng = pos.lng;
+      updatePoints();    
 
       // Center map at current location
       map.setCenter(pos);
@@ -167,7 +178,7 @@ function autoUpdate() {
 
   // UPDATE EVERY SECOND
   setTimeout(autoUpdate, 1000);
-  setTimeout(updatePoints, 2000);
+  setTimeout(updatePoints, 5000);
 }
 
 
@@ -251,9 +262,9 @@ function initFirebase() {
 
 //////////////////// LOCATION POINTS GENERATOR ////////////////////
 function generateRandomPoints(){
-	var prevPoints= [];
-  randomPoints = new google.maps.MVCArray(prevPoints);
-	for( var i = 0; i < 1000; i++){
+	//var prevPoints= [];
+  randomPoints = new google.maps.MVCArray([]);
+	for( var i = 0; i < 10; i++){
 
     // ORIGINAL
     //var lat = 32.87 + randomIntFromInterval(0,1);
@@ -275,14 +286,21 @@ function generateRandomPoints(){
 function updatePoints(){
   var currentPoint = marker.getPosition();
   //var point = []
-  //randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
-  c//onsole.log(randomPoints)
+  if (Math.abs(curr_lat - prev_lat ) > 0.003 || Math.abs(curr_lgn - prev_lng) > 0.003) {
+
+    randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
+    prev_lat = curr_lat;
+    prev_lng = curr_lgn;
+    console.log(prev_lat);
+  }
+  //console.log(randomPoints)
   // HEATMAP INITIALIZATION
   /*heatmap.setMap(null);
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: randomPoints, // ARRAY OF POINTS TO LOAD
     map: map
   });
+
   
   changeGradient();
   changeOpacity();
