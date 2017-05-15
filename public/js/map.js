@@ -12,9 +12,10 @@ var randomPoints;
 
 // HEATMAP AND FIREBASE - location 
 var prev_lat = 0;
-var prev_lgn = 0;
+var prev_lng = 0;
 var curr_lat;
-var curr_lgn;
+var curr_lng;
+var count = 0;
 
 //////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
 autoUpdate();
@@ -85,12 +86,12 @@ function initMap() {
       map.setCenter(pos);
       center = pos;
 
-  	}, function() {
+    }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
   } 
   else {
-  	  // Center at default location
+      // Center at default location
       map.setCenter(defaultCenter);
       handleLocationError(false, infoWindow, map.getCenter());
   }
@@ -262,9 +263,9 @@ function initFirebase() {
 
 //////////////////// LOCATION POINTS GENERATOR ////////////////////
 function generateRandomPoints(){
-	//var prevPoints= [];
+  //var prevPoints= [];
   randomPoints = new google.maps.MVCArray([]);
-	for( var i = 0; i < 10; i++){
+  for( var i = 0; i < 0; i++){
 
     // ORIGINAL
     //var lat = 32.87 + randomIntFromInterval(0,1);
@@ -274,25 +275,28 @@ function generateRandomPoints(){
     var lat = 32.874 + randomIntFromInterval(0,2);
     var lng = -117.242  +randomIntFromInterval(0,2);
     //console.log("LAT:" + lat + " LNG:" + lng);  
-		randomPoints.push(new google.maps.LatLng(lat,lng));
     randomPoints.push(new google.maps.LatLng(lat,lng));
     randomPoints.push(new google.maps.LatLng(lat,lng));
-	}
+    randomPoints.push(new google.maps.LatLng(lat,lng));
+  }
   console.log(randomPoints);
-	return randomPoints;
+  return randomPoints;
 }
 
 //////////////////// LOCATION POINTS Updater ////////////////////
 function updatePoints(){
   var currentPoint = marker.getPosition();
   //var point = []
-  if (Math.abs(curr_lat - prev_lat ) > 0.003 || Math.abs(curr_lgn - prev_lng) > 0.003) {
+  if ((Math.abs(curr_lat - prev_lat ) > 0.003 || Math.abs(curr_lng - prev_lng) > 0.003)) { //} || (count < 3))  {
 
     randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
     prev_lat = curr_lat;
-    prev_lng = curr_lgn;
+    prev_lng = curr_lng;
+    count = 0;
+
     console.log(prev_lat);
   }
+  count++;
   //console.log(randomPoints)
   // HEATMAP INITIALIZATION
   /*heatmap.setMap(null);
@@ -300,7 +304,6 @@ function updatePoints(){
     data: randomPoints, // ARRAY OF POINTS TO LOAD
     map: map
   });
-
   
   changeGradient();
   changeOpacity();
