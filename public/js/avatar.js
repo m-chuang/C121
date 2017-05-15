@@ -8,14 +8,25 @@ $(document).ready(function() {
 	//loadTabColors();
 
 	// base ferret avatar
-	var avatarBase = loadImg("/images/avatar/Ferret.png");
+	var avatarBase = new Image();
+	avatarBase.onload = function() {
+			ctx.drawImage(avatarBase, 50, 91);
+	}
+	avatarBase.src = "/images/avatar/Ferret.png";
+	//var avatarBase = loadImg("/images/avatar/Ferret.png");
 
 	var shoes = loadImg("/images/avatar/shoes/BlueSocks.png");
 	var shirts = loadImg("/images/avatar/shirts/GreenStripeShirt.png");
 	var hat = loadImg("/images/avatar/hats/TopHat.png");
+
+	// One way to change an image
+	shoes.src = "/images/avatar/shoes/RedSneakers.png";
+
+	// Another way to change an image with a function
+	setImg(hat, "/images/avatar/hats/PropellerHat.png");
 });
 
-// Helper function to load images by URL onto the avatar
+// Load images by URL onto the canvas
 function loadImg(imgUrl) {
 	var imgObj = new Image();
 	imgObj.onload = function() {
@@ -23,6 +34,11 @@ function loadImg(imgUrl) {
 	}
 	imgObj.src = imgUrl;
 	return imgObj;
+}
+
+// Change the image
+function setImg(imgObj,imgUrl) {
+  imgObj.src = imgUrl;
 }
 
 

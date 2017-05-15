@@ -14,26 +14,15 @@ html,body{
 	/*background-color: green;*/
 }
 
-/* center the avatar in the container */
-#avatarBase {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
-}
-
-/* Avatar canvas */
+/* center the Avatar Canvas in the container */
 #avatarCanvas {
-    position: absolute;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  /*height: 284px;
-  width: 468px;*/
+
 }
 
 
