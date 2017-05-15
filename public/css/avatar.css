@@ -10,6 +10,7 @@ html,body{
 	height: 40%;
 	width: 100%;
 	position: relative;
+  /*text-align: center;*/
 	/*background-color: green;*/
 }
 
@@ -21,6 +22,12 @@ html,body{
 	left: 0;
 	right: 0;
 	margin: auto;
+}
+
+/* Avatar canvas */
+#avatarCanvas {
+  /*height: 284px;
+  width: 468px;*/
 }
 
 
