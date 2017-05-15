@@ -8,6 +8,7 @@ var GeoMarker;
 var errorCircle;
 var center;
 var zoomLevel;
+var randomPoints;
 
 //////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
 autoUpdate();
@@ -118,11 +119,11 @@ function initMap() {
   });
 
 
-  // INITIALIZE FIREBASE
-  initFirebase();
+
 }
 
-
+  // INITIALIZE FIREBASE
+  initFirebase();
 
 //////////////////// LOCATION UPDATER ////////////////////
 function autoUpdate() {
@@ -166,6 +167,7 @@ function autoUpdate() {
 
   // UPDATE EVERY SECOND
   setTimeout(autoUpdate, 1000);
+  setTimeout(updatePoints, 2000);
 }
 
 
@@ -249,7 +251,8 @@ function initFirebase() {
 
 //////////////////// LOCATION POINTS GENERATOR ////////////////////
 function generateRandomPoints(){
-	var randomPoints = [];
+	var prevPoints= [];
+  randomPoints = new google.maps.MVCArray(prevPoints);
 	for( var i = 0; i < 1000; i++){
 
     // ORIGINAL
@@ -266,6 +269,24 @@ function generateRandomPoints(){
 	}
   console.log(randomPoints);
 	return randomPoints;
+}
+
+//////////////////// LOCATION POINTS Updater ////////////////////
+function updatePoints(){
+  var currentPoint = marker.getPosition();
+  //var point = []
+  //randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
+  c//onsole.log(randomPoints)
+  // HEATMAP INITIALIZATION
+  /*heatmap.setMap(null);
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data: randomPoints, // ARRAY OF POINTS TO LOAD
+    map: map
+  });
+  
+  changeGradient();
+  changeOpacity();
+  changeRadius();*/
 }
 
 
