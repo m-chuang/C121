@@ -13,10 +13,15 @@ var randomPoints;
 // HEATMAP AND FIREBASE - location 
 var prev_lat = 0;
 var prev_lng = 0;
-var curr_lat;
-var curr_lng;
-var count = 0;
-
+var data = {
+  sender: null,
+  //timestamp: null,
+  lat: null,
+  lng: null
+};
+var database;
+var refPoints;
+var sender;
 //////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
 autoUpdate();
 
@@ -239,7 +244,8 @@ function initFirebase() {
   };
   
   firebase.initializeApp(config);
-
+  database = firebase.database();
+  refPoints = database.ref('points');
    // FIREBASE
   const lg_signout = document.getElementById('lg_signout');
 
@@ -250,6 +256,10 @@ function initFirebase() {
    firebase.auth().onAuthStateChanged(firebaseUser => {
         if(firebaseUser) {
           console.log(firebaseUser);
+
+          // console.log(firebase.child);
+          sender = data.sender = firebaseUser.uid;
+          //console.log(data.sender);
           
         } else {
           console.log('not logged in');
@@ -278,10 +288,38 @@ function generateRandomPoints(){
     randomPoints.push(new google.maps.LatLng(lat,lng));
     randomPoints.push(new google.maps.LatLng(lat,lng));
   }
-  console.log(randomPoints);
+
+  //var user = firebase.auth().currentUser;
+  //
+  //console.log(randomPoints);
+  return randomPoints;
+}
+//////////////////// Prev Location Points Loader ////////////////
+
+function loadPoints() {
+  randomPoints = new google.maps.MVCArray([]);
+  refPoints.on('value', getPoints, errData);
   return randomPoints;
 }
 
+function getPoints(data) {
+  console.log(data.val());
+  var points = data.val();
+  var keys = Object.keys(points);
+
+  for (var i = 0 ; i < keys.length; i++) {
+    var k = keys[i];
+    var lat = points[k].lat;
+    var lng = points[k].lng;
+
+    randomPoints.push(new google.maps.LatLng(lat,lng));
+  }
+}
+
+function errData(err) {
+  console.log('Error!');
+  console.log(err);
+}
 //////////////////// LOCATION POINTS Updater ////////////////////
 function updatePoints(){
   var currentPoint = marker.getPosition();
@@ -292,10 +330,23 @@ function updatePoints(){
     randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
     prev_lat = currentPoint.lat();
     prev_lng = currentPoint.lng();
-    count = 0;
+
+    // Add point to firebase
+    data.lat = prev_lat;
+    data.lng = prev_lng;
+
+    refPoints.push(data);
+   /* var ref = firebase.push(data, function(err) {
+      if (err) {  // Data was not written to firebase.
+        console.warn(err);
+      }
+    });*/
+
+    //count = 0;
 
     //console.log(prev_lat);
   }
+
 }
 
 
