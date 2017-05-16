@@ -10,17 +10,19 @@ html,body{
 	height: 40%;
 	width: 100%;
 	position: relative;
+  /*text-align: center;*/
 	/*background-color: green;*/
 }
 
-/* center the avatar in the container */
-#avatarBase {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
+/* center the Avatar Canvas in the container */
+#avatarCanvas {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
 }
 
 
