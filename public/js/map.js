@@ -8,6 +8,14 @@ var GeoMarker;
 var errorCircle;
 var center;
 var zoomLevel;
+var randomPoints;
+
+// HEATMAP AND FIREBASE - location 
+var prev_lat = 0;
+var prev_lng = 0;
+var curr_lat;
+var curr_lng;
+var count = 0;
 
 //////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
 autoUpdate();
@@ -69,16 +77,19 @@ function initMap() {
       // Print to console the coordinates of the current location
       console.log("curr lat=" + pos.lat + ", lng=" + pos.lng);
 
+      // CLEAR HEATMAP AT CURRENT LOCATION (MAYBE - given it's undiscovered location)
+      updatePoints();    
+
       // Center map at current location
       map.setCenter(pos);
       center = pos;
 
-  	}, function() {
+    }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
   } 
   else {
-  	  // Center at default location
+      // Center at default location
       map.setCenter(defaultCenter);
       handleLocationError(false, infoWindow, map.getCenter());
   }
@@ -118,11 +129,11 @@ function initMap() {
   });
 
 
-  // INITIALIZE FIREBASE
-  initFirebase();
+
 }
 
-
+  // INITIALIZE FIREBASE
+  initFirebase();
 
 //////////////////// LOCATION UPDATER ////////////////////
 function autoUpdate() {
@@ -133,6 +144,7 @@ function autoUpdate() {
     // LOCATION MARKER UPDATER
     if (marker) {
       marker.setPosition(newPoint);
+
     }
     else {
       marker = new google.maps.Marker({
@@ -166,6 +178,7 @@ function autoUpdate() {
 
   // UPDATE EVERY SECOND
   setTimeout(autoUpdate, 1000);
+  setTimeout(updatePoints, 5000);
 }
 
 
@@ -249,8 +262,9 @@ function initFirebase() {
 
 //////////////////// LOCATION POINTS GENERATOR ////////////////////
 function generateRandomPoints(){
-	var randomPoints = [];
-	for( var i = 0; i < 1000; i++){
+  //var prevPoints= [];
+  randomPoints = new google.maps.MVCArray([]);
+  for( var i = 0; i < 100; i++){
 
     // ORIGINAL
     //var lat = 32.87 + randomIntFromInterval(0,1);
@@ -260,12 +274,28 @@ function generateRandomPoints(){
     var lat = 32.874 + randomIntFromInterval(0,2);
     var lng = -117.242  +randomIntFromInterval(0,2);
     //console.log("LAT:" + lat + " LNG:" + lng);  
-		randomPoints.push(new google.maps.LatLng(lat,lng));
     randomPoints.push(new google.maps.LatLng(lat,lng));
     randomPoints.push(new google.maps.LatLng(lat,lng));
-	}
+    randomPoints.push(new google.maps.LatLng(lat,lng));
+  }
   console.log(randomPoints);
-	return randomPoints;
+  return randomPoints;
+}
+
+//////////////////// LOCATION POINTS Updater ////////////////////
+function updatePoints(){
+  var currentPoint = marker.getPosition();
+  
+  
+  if ((Math.abs(currentPoint.lat() - prev_lat ) > 0.0001 || Math.abs(currentPoint.lng() - prev_lng) > 0.0001)) { //} || (count < 3))  {
+
+    randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
+    prev_lat = currentPoint.lat();
+    prev_lng = currentPoint.lng();
+    count = 0;
+
+    //console.log(prev_lat);
+  }
 }
 
 
