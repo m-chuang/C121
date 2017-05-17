@@ -18,6 +18,7 @@ var data = {
   //timestamp: null,
   lat: null,
   lng: null
+ 
 };
 var database;
 var refPoints;
@@ -37,17 +38,17 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18,                   // default zoom level
     center: defaultCenter,      // center map at default location
-    disableDefaultUI: true,     // disable UI buttons
+    //disableDefaultUI: true,     // disable UI buttons
     clickableIcons: false,      // disable default Google POIs
-    draggable: false,            // DEBUG: set to true
+    draggable: true,            // DEBUG: set to true
     maxZoom: 18,                // DO NOT CHANGE
-    minZoom: 18,                // DEBUG: change to 1
+    //minZoom: 18,                // DEBUG: change to 1
   });
 
 
   // HEATMAP INITIALIZATION
   heatmap = new google.maps.visualization.HeatmapLayer({
-    data: generateRandomPoints(),//loadPoints(),  // ARRAY OF POINTS TO LOAD
+    data: loadPoints(),  // ARRAY OF POINTS TO LOAD
     map: map
   });
 
