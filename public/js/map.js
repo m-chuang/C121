@@ -47,7 +47,7 @@ function initMap() {
 
   // HEATMAP INITIALIZATION
   heatmap = new google.maps.visualization.HeatmapLayer({
-    data: generateRandomPoints(), // ARRAY OF POINTS TO LOAD
+    data: generateRandomPoints(),//loadPoints(),  // ARRAY OF POINTS TO LOAD
     map: map
   });
 
@@ -306,13 +306,28 @@ function getPoints(data) {
   console.log(data.val());
   var points = data.val();
   var keys = Object.keys(points);
+  var currentPoint = marker.getPosition();
+  var c_lat = currentPoint.lat();
+  var c_lng = currentPoint.lng();
 
   for (var i = 0 ; i < keys.length; i++) {
-    var k = keys[i];
-    var lat = points[k].lat;
-    var lng = points[k].lng;
 
-    randomPoints.push(new google.maps.LatLng(lat,lng));
+    var k = keys[i];
+    console.log(sender);
+    console.log(points[k].sender);
+
+    if(points[k].sender == sender) {
+      console.log("GOT HERE!");
+      
+      var lat = points[k].lat;
+      var lng = points[k].lng;
+
+      if ((Math.abs(c_lat - lat ) <= 0.01 || Math.abs(c_lng - lng) <= 0.01)) {
+        prev_lat = c_lat;
+        prev_lng = c_lng;
+      }
+      randomPoints.push(new google.maps.LatLng(lat,lng));
+    }
   }
 }
 
@@ -326,7 +341,7 @@ function updatePoints(){
   
   
   if ((Math.abs(currentPoint.lat() - prev_lat ) > 0.0001 || Math.abs(currentPoint.lng() - prev_lng) > 0.0001)) { //} || (count < 3))  {
-
+    console.log("GOT HERE TOO!")
     randomPoints.push(new google.maps.LatLng(currentPoint.lat(),currentPoint.lng()));
     prev_lat = currentPoint.lat();
     prev_lng = currentPoint.lng();
