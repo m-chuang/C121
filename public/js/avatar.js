@@ -43,7 +43,21 @@ function setImg(imgObj,imgUrl) {
   imgObj.src = imgUrl;
 }
 
-
+function updateAvatar(image){
+	var indexOfPath;
+	console.log(image);
+	// Do some String manipulation to find out which item was clicked
+	for( var i = image.length-1 ; i > 0; i--){
+		if(image[i] == "/"){
+			indexOfPath = i;
+			console.log(i);
+			break;
+		}
+	}
+	var avatarPath = image.slice(indexOfPath,image.length);
+	console.log(avatarPath);
+	setImg(hat, "/images/avatar/hats" + avatarPath);
+}
 // load each inventory tab's background color
 /*function loadTabColors() {
 	var tabs = document.getElementsByClassName("tab");
