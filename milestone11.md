@@ -13,4 +13,5 @@ I worked on clearing up the map based on the user's location and on storing loca
 I worked on the avatar dressup functionality. So far we are able to layer clothing items onto the base ferret avatar by using HTML5 canvas. The functionality to click on inventory items to change the avatar's clothes is in the works.
 
 # Screenshot #
-![screenshot](/images/milestone/TODO)
+![screenshot](/images/milestones/milestone11_points.PNG)
+The map is cleared only for the 3 locations where I have been. I didn't move from my location during these sessions.
