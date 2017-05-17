@@ -1,23 +1,25 @@
 // array of tab colors
 //var tabColorArr = ["#ff9999", "#ffcc66", "#99ff66"]
+// Canvas variables
 var canvas = document.getElementById("avatarCanvas");
 var ctx = canvas.getContext("2d");
+// Each type of item to display on the avatar
+var avatarBase; // base ferret avatar
+var hat;
+var shirts;
+var shoes;
 
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	//loadTabColors();
 
-	// base ferret avatar
-	var avatarBase = new Image();
-	avatarBase.onload = function() {
-			ctx.drawImage(avatarBase, 50, 91);
-	}
-	avatarBase.src = "/images/avatar/Ferret.png";
-	//var avatarBase = loadImg("/images/avatar/Ferret.png");
+	// load base ferret avatar
+	avatarBase = loadImg("/images/avatar/Ferret.png");
 
-	var shoes = loadImg("/images/avatar/shoes/BlueSocks.png");
-	var shirts = loadImg("/images/avatar/shirts/GreenStripeShirt.png");
-	var hat = loadImg("/images/avatar/hats/TopHat.png");
+  // layer items
+	shoes = loadImg("/images/avatar/shoes/BlueSocks.png");
+	shirts = loadImg("/images/avatar/shirts/GreenStripeShirt.png");
+	hat = loadImg("/images/avatar/hats/TopHat.png");
 
 	// One way to change an image
 	shoes.src = "/images/avatar/shoes/RedSneakers.png";
