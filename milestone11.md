@@ -8,7 +8,8 @@ For this milestone I was tasked with creating a visual representation for user s
 
 
 ### Scott ###
-.
+For this milestone, I worked on being able to update the avatar on the avatar page. Right now, we can update a few specific hats, but the code to change any avatar is there. For the next milestone, I will try to get all the other avatars working.
+
 
 ### Tina ###
 I worked on the avatar dressup functionality. So far we are able to layer clothing items onto the base ferret avatar by using HTML5 canvas. The functionality to click on inventory items to change the avatar's clothes is in the works.
