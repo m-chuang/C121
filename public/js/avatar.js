@@ -5,9 +5,9 @@ var canvas = document.getElementById("avatarCanvas");
 var ctx = canvas.getContext("2d");
 // Each type of item to display on the avatar
 var avatarBase; // base ferret avatar
-var hat;
-var shirts;
-var shoes;
+var hatUrl = "/images/avatar/hats/PropellerHat.png";
+var shirtUrl = "/images/avatar/shirts/GreenStripeShirt.png";
+var shoesUrl = "/images/avatar/shoes/BlueSocks.png";
 
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
@@ -17,25 +17,28 @@ $(document).ready(function() {
 	avatarBase = loadImg("/images/avatar/Ferret.png");
 
   // layer items
-	shoes = loadImg("/images/avatar/shoes/BlueSocks.png");
-	shirts = loadImg("/images/avatar/shirts/GreenStripeShirt.png");
-	hat = loadImg("/images/avatar/hats/TopHat.png");
+	loadImg(shoesUrl);
+	loadImg(shirtUrl);
+	loadImg(hatUrl);
 
 	// One way to change an image
-	shoes.src = "/images/avatar/shoes/RedSneakers.png";
+	//shoes.src = "/images/avatar/shoes/RedSneakers.png";
 
 	// Another way to change an image with a function
-	setImg(hat, "/images/avatar/hats/PropellerHat.png");
+	//setImg(hat, "/images/avatar/hats/PropellerHat.png");
 });
 
 // Load images by URL onto the canvas
 function loadImg(imgUrl) {
 	var imgObj = new Image();
+	var newString = String(imgUrl);
+	imgObj.src = newString;
+
 	imgObj.onload = function() {
 		ctx.drawImage(imgObj, 0, 0);
 	}
-	imgObj.src = imgUrl;
-	return imgObj;
+
+	return imgObj.src;
 }
 
 // Change the image
@@ -46,6 +49,7 @@ function setImg(imgObj,imgUrl) {
 function updateAvatar(image){
 	var indexOfPath;
 	console.log(image);
+	
 	// Do some String manipulation to find out which item was clicked
 	for( var i = image.length-1 ; i > 0; i--){
 		if(image[i] == "/"){
@@ -56,7 +60,22 @@ function updateAvatar(image){
 	}
 	var avatarPath = image.slice(indexOfPath,image.length);
 	console.log(avatarPath);
-	setImg(hat, "/images/avatar/hats" + avatarPath);
+	var newUrl = "/images/avatar/hats/" + avatarPath;
+	hatUrl = newUrl;
+
+	// Redraw the canvas with the updated items
+	drawAvatar();
+}
+
+function drawAvatar(){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	avatarBase = loadImg("/images/avatar/Ferret.png");
+	// layer items
+	loadImg(shoesUrl);
+	loadImg(shirtUrl);
+	loadImg(hatUrl);
+	
+
 }
 // load each inventory tab's background color
 /*function loadTabColors() {
