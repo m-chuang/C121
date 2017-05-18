@@ -46,7 +46,7 @@ function setImg(imgObj,imgUrl) {
   imgObj.src = imgUrl;
 }
 
-function updateAvatar(image){
+function updateAvatar(image,type){
 	var indexOfPath;
 	console.log(image);
 	
@@ -60,9 +60,21 @@ function updateAvatar(image){
 	}
 	var avatarPath = image.slice(indexOfPath,image.length);
 	console.log(avatarPath);
-	var newUrl = "/images/avatar/hats/" + avatarPath;
-	hatUrl = newUrl;
-
+	var newUrl = "/images/avatar/"+ type + avatarPath;
+	
+	switch(type){
+		case "hats":
+			hatUrl = newUrl;
+			break;
+		case "shirts":
+			shirtUrl = newUrl;
+			break;
+		case "shoes":
+			shoesUrl = newUrl;
+			break;
+		default:
+			console.log("Case statement messed up in updateAvatar");
+	}		
 	// Redraw the canvas with the updated items
 	drawAvatar();
 }
