@@ -9,18 +9,20 @@ var hatUrl = "/images/avatar/hats/PropellerHat.png";
 var shirtUrl = "/images/avatar/shirts/GreenStripeShirt.png";
 var shoesUrl = "/images/avatar/shoes/BlueSocks.png";
 
+var savedHatUrl;
+var savedShirtUrl;
+var savedShoesUrl;
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	//loadTabColors();
 
 	// load base ferret avatar
 	avatarBase = loadImg("/images/avatar/Ferret.png");
-
   // layer items
 	loadImg(shoesUrl);
 	loadImg(shirtUrl);
 	loadImg(hatUrl);
-
+	save();
 	// One way to change an image
 	//shoes.src = "/images/avatar/shoes/RedSneakers.png";
 
@@ -88,6 +90,20 @@ function drawAvatar(){
 	loadImg(hatUrl);
 	
 
+}
+
+function save(){
+	savedHatUrl = hatUrl;
+	savedShirtUrl = shirtUrl;
+	savedShoesUrl = shoesUrl;
+	drawAvatar();
+}
+
+function restore(){
+	hatUrl = savedHatUrl;
+	shirtUrl = savedShirtUrl;
+	shoesUrl = savedShoesUrl;
+	drawAvatar();
 }
 // load each inventory tab's background color
 /*function loadTabColors() {
