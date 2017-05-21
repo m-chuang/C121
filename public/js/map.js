@@ -60,7 +60,7 @@ function initMap() {
   // FERRET IMAGE PROPERTIES
   icon = {
     url: "/images/avatar/Ferret.png",
-    scaledSize: new google.maps.Size(100, 60), // scaled smaller
+    scaledSize: new google.maps.Size(150, 100), // scaled smaller
     origin: new google.maps.Point(0, 0),
     //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
   };
