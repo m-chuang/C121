@@ -2,7 +2,7 @@
 var map;
 var defaultCenter;
 var marker;
-var icon = "/images/ferret0.png";
+var icon = "/images/avatar/Ferret.png";
 var heatmap;
 var GeoMarker;
 var errorCircle;
@@ -39,6 +39,7 @@ function initMap() {
     zoom: 18,                   // default zoom level
     center: defaultCenter,      // center map at default location
     //disableDefaultUI: true,     // disable UI buttons
+    streetViewControl: false,   // disable Street View
     clickableIcons: false,      // disable default Google POIs
     draggable: true,            // DEBUG: set to true
     maxZoom: 18,                // DO NOT CHANGE
@@ -58,8 +59,8 @@ function initMap() {
   
   // FERRET IMAGE PROPERTIES
   icon = {
-    url: "/images/ferret0.png",
-    scaledSize: new google.maps.Size(100, 50), // scaled smaller
+    url: "/images/avatar/Ferret.png",
+    scaledSize: new google.maps.Size(150, 100), // scaled smaller
     origin: new google.maps.Point(0, 0),
     //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
   };
