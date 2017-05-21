@@ -2,7 +2,7 @@
 var map;
 var defaultCenter;
 var marker;
-var icon = "/images/ferret0.png";
+var icon = "/images/avatar/Ferret.png";
 var heatmap;
 var GeoMarker;
 var errorCircle;
@@ -58,7 +58,7 @@ function initMap() {
   
   // FERRET IMAGE PROPERTIES
   icon = {
-    url: "/images/ferret0.png",
+    url: "/images/avatar/.png",
     scaledSize: new google.maps.Size(100, 50), // scaled smaller
     origin: new google.maps.Point(0, 0),
     //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
