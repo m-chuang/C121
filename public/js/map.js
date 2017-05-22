@@ -58,20 +58,44 @@ function initMap() {
   changeOpacity();
   changeRadius();
   
-  // FERRET IMAGE PROPERTIES
-  icon = {
-    url: "/images/avatar/Ferret.png",
-    scaledSize: new google.maps.Size(150, 100), // scaled smaller
-    origin: new google.maps.Point(0, 0),
-    //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
-  };
+  // Get Data URL for avatar ferret //
+  // Load images by URL onto the canvas
+  var virtualCanvas = document.createElement("CANVAS");
+  virtualCanvas.height = "284";
+  virtualCanvas.width = "486";
+  var ctx = virtualCanvas.getContext("2d");
+  var avatarDataUrl;
 
-  // CURRENT LOCATION MARKER INITIALIZATION (FERRET IMAGE)
-  marker = new google.maps.Marker({
-    position: defaultCenter,
-    icon: icon,
-    map: map
-  });
+  function loadImg(imgUrl) {
+    var imgObj = new Image();
+    var newString = String(imgUrl);
+    imgObj.src = newString;
+
+    imgObj.onload = function() {
+      ctx.drawImage(imgObj, 0, 0);
+      avatarDataUrl = virtualCanvas.toDataURL();
+      // FERRET IMAGE PROPERTIES
+      icon = {
+        url: avatarDataUrl.toString(),
+        scaledSize: new google.maps.Size(160, 100), // scaled smaller
+        origin: new google.maps.Point(0, 0),
+        //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
+      };
+
+      // CURRENT LOCATION MARKER INITIALIZATION (FERRET IMAGE)
+      marker = new google.maps.Marker({
+        position: defaultCenter,
+        icon: icon,
+        map: map
+      });
+    }
+  }
+
+  // Virtually put on the avatar to make the ferret avatar
+  loadImg("/images/avatar/Ferret.png");
+  loadImg("/images/avatar/hats/PropellerHat.png");
+  loadImg("/images/avatar/shirts/GreenStripeShirt.png");
+  loadImg("/images/avatar/shoes/BlueSocks.png"  );
 
 
   // GET CURRENT LOCATION

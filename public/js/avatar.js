@@ -105,6 +105,27 @@ function restore(){
 	shoesUrl = savedShoesUrl;
 	drawAvatar();
 }
+
+function saveAvatar(){
+  //var canvas = document.getElementById("avatarCanvas");
+  var Vcanvas = document.createElement("CANVAS");
+  Vcanvas.height = "284";
+  Vcanvas.width = "486";
+  var Vctx = Vcanvas.getContext("2d");
+
+  var imgObj = new Image();
+	var newString = String("/images/avatar/Ferret.png");
+	imgObj.src = newString;
+
+	imgObj.onload = function() {
+		Vctx.drawImage(imgObj, 0, 0);
+		var data = Vcanvas.toDataURL();
+	  	console.log(Vcanvas.toDataURL("image/png"));
+  		document.write('<img src="'+Vcanvas.toDataURL("image/png")+'"/>')
+	}
+
+
+}
 // load each inventory tab's background color
 /*function loadTabColors() {
 	var tabs = document.getElementsByClassName("tab");
