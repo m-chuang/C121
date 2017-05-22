@@ -19,10 +19,10 @@ $(document).ready(function() {
 	// load base ferret avatar
 	avatarBase = loadImg("/images/avatar/Ferret.png");
   // layer items
-	loadImg(shoesUrl);
-	loadImg(shirtUrl);
-	loadImg(hatUrl);
-	save();
+	//loadImg(shoesUrl);
+	//loadImg(shirtUrl);
+	//loadImg(hatUrl);
+	//save();
 	// One way to change an image
 	//shoes.src = "/images/avatar/shoes/RedSneakers.png";
 
@@ -104,6 +104,27 @@ function restore(){
 	shirtUrl = savedShirtUrl;
 	shoesUrl = savedShoesUrl;
 	drawAvatar();
+}
+
+function saveAvatar(){
+  //var canvas = document.getElementById("avatarCanvas");
+  var Vcanvas = document.createElement("CANVAS");
+  Vcanvas.height = "284";
+  Vcanvas.width = "486";
+  var Vctx = Vcanvas.getContext("2d");
+
+  var imgObj = new Image();
+	var newString = String("/images/avatar/Ferret.png");
+	imgObj.src = newString;
+
+	imgObj.onload = function() {
+		Vctx.drawImage(imgObj, 0, 0);
+		var data = Vcanvas.toDataURL();
+	  	console.log(Vcanvas.toDataURL("image/png"));
+  		document.write('<img src="'+Vcanvas.toDataURL("image/png")+'"/>')
+	}
+
+
 }
 // load each inventory tab's background color
 /*function loadTabColors() {
