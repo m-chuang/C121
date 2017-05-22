@@ -50,6 +50,7 @@ function initMap() {
   // HEATMAP INITIALIZATION
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: loadPoints(),  // ARRAY OF POINTS TO LOAD
+    maxIntensity: 3,
     map: map
   });
 
@@ -93,7 +94,7 @@ function initMap() {
 
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
-    });
+    }, {maximumAge: 600000, timeout: 5000, enableHighAccuracy: true});
   } 
   else {
       // Center at default location
@@ -405,5 +406,5 @@ function changeOpacity() {
 
 // CHANGE RADIUS OF HEATMAP POINTS
 function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 75);
+  heatmap.set('radius', heatmap.get('radius') ? null : 50);
 }
