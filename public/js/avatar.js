@@ -19,10 +19,10 @@ $(document).ready(function() {
 	// load base ferret avatar
 	avatarBase = loadImg("/images/avatar/Ferret.png");
   // layer items
-	//loadImg(shoesUrl);
-	//loadImg(shirtUrl);
-	//loadImg(hatUrl);
-	//save();
+	loadImg(shoesUrl);
+	loadImg(shirtUrl);
+	loadImg(hatUrl);
+	save();
 	// One way to change an image
 	//shoes.src = "/images/avatar/shoes/RedSneakers.png";
 
