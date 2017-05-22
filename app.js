@@ -20,8 +20,10 @@ var help = require('./routes/help');
 
 var app = express();
 
+var portNumber = process.env.PORT || 3000;
+
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', portNumber);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
@@ -38,6 +40,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+}
+
+if(portNumber != 3000){
+	app.get('*',function(req,res,next){
+	  if(req.headers['x-forwarded-proto']!='https')
+	    res.redirect('https://mypreferreddomain.com'+req.url)
+	  else
+	    next() /* Continue to other routes if we're not redirecting */
+	});
 }
 
 app.get('/', index.view);
