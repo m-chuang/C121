@@ -17,6 +17,7 @@ I worked on the avatar dressup functionality. So far we are able to layer clothi
 # Screenshot #
 ![screenshot](/images/milestones/milestone11_points.PNG)
 The map is cleared only for the 3 locations where I have been. I didn't move from my location during these sessions.
+
 ![screenshot](/images/milestones/milestone11_stats.png)
 This is the user profile page depicting the user's stats. Right now a slider is in place so testers can see the different ranks that are attainable. More detail will be added in the future.
 
