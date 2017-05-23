@@ -13,18 +13,22 @@ For this milestone, I helped write a function that could randomly generate locat
 I edited our heatmap overlay to have a gradient that makes it look like a "reverse" heatmap, where the points would appear transparent and the rest of the map would have a green overlay. I also started up handlerbars and routes to the other pages of our app (Quests, Stats, Help).
 
 # Screenshot #
-![screenshot](/public/images/Ferret%20Avatar/Hats/PropellerHat.png/)
+![screenshot](/public/images/avatar/hats/PropellerHat.png/)
 
 This is the png version of the item Propeller Hat that users can customize their ferret with.
-![screenshot](public/images/Ferret%20Avatar/Shoes/RedSneakers.png)
+
+![screenshot](public/images/avatar/shoes/RedSneakers.png)
 
 This is the png version of the item Red Sneakers that users can customize their ferret with.
 
 ![screenshot](/images/milestones/milestone9_infowindow.png)
 This is a screenshot of an item marker and its window when opened. This is a new feature that has been added since Milestone 7. 
+
 ![screenshot](/images/milestones/milestone9_quests.png)
 This is a screenshot of the quests page. This is a new feature that has been added since Milestone 7. 
+
 ![screenshot](/images/milestones/milestone9_avatar.png)
 This is a screenshot of the avatar page. This is a new feature that has been added since Milestone 7. 
+
 ![screenshot](/images/milestones/milestone9_zoomedout.png)
 This is a screenshot of what the map looks like when zoomed out; the total explored area and item markers can all be seen here. (This is a debug view that is not accessible for normal users). The reverse heatmap view and all of the items and their locations are new features that have been added since Milestone 7.
