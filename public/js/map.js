@@ -13,15 +13,26 @@ var randomPoints;
 // HEATMAP AND FIREBASE - location 
 var prev_lat = 0;
 var prev_lng = 0;
-var data = {
-  sender: null,
+var data = {  // change to not have sender - change structure in ref from 'points' to 'uid/points'
+  sender: null,  // change to have '{uid}/points' and '{uid}/items'
   //timestamp: null,
   lat: null,
   lng: null
  
 };
+var user;
+var point_data = {
+  lat: null,
+  lng: null
+}
+// Will store item data -- stored in refItems
+var item_data = {
+  item: null
+}
+//var item_data = {}
 var database;
-var refPoints;
+var refPoints; // Will refer to the {uid}/points child in firebase
+var refItems; // Will refer to the {uid}/items child in firebase
 var sender;
 //////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
 autoUpdate();
@@ -45,11 +56,14 @@ function initMap() {
     maxZoom: 18,                // DO NOT CHANGE
     //minZoom: 18,                // DEBUG: change to 1
   });
+  
 
 
+  randomPoints = new google.maps.MVCArray([]);
+  
   // HEATMAP INITIALIZATION
   heatmap = new google.maps.visualization.HeatmapLayer({
-    data: loadPoints(),  // ARRAY OF POINTS TO LOAD
+    data: randomPoints, //loadPoints(),  // ARRAY OF POINTS TO LOAD
     maxIntensity: 3,
     map: map
   });
@@ -118,7 +132,7 @@ function initMap() {
 
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
-    }, {maximumAge: 600000, timeout: 5000, enableHighAccuracy: true});
+    }, {maximumAge: 600000, timeout: 5000, enableHighAccuracy: true}); // Enable high accuracy - GPS
   } 
   else {
       // Center at default location
@@ -272,7 +286,7 @@ function initFirebase() {
   
   firebase.initializeApp(config);
   database = firebase.database();
-  refPoints = database.ref('points');
+  
    // FIREBASE
   const lg_signout = document.getElementById('lg_signout');
 
@@ -285,14 +299,17 @@ function initFirebase() {
           console.log(firebaseUser);
 
           // console.log(firebase.child);
-          sender = data.sender = firebaseUser.uid;
-          //console.log(data.sender);
+          sender = firebaseUser.uid;
+          console.log(sender);
+          refPoints = database.ref(sender+"/points");
+          loadPoints();
           
         } else {
           console.log('not logged in');
           window.location = './';
         }
     });
+  
 }
 
 
@@ -324,9 +341,10 @@ function generateRandomPoints(){
 //////////////////// Prev Location Points Loader ////////////////
 
 function loadPoints() {
-  randomPoints = new google.maps.MVCArray([]);
+  //randomPoints = new google.maps.MVCArray([]);
+  
   refPoints.on('value', getPoints, errData);
-  return randomPoints;
+  //return randomPoints;
 }
 
 function getPoints(data) {
@@ -337,24 +355,25 @@ function getPoints(data) {
   var c_lat = currentPoint.lat();
   var c_lng = currentPoint.lng();
 
+console.log("Loading Points! :)");
   for (var i = 0 ; i < keys.length; i++) {
 
     var k = keys[i];
-    console.log(sender);
-    console.log(points[k].sender);
+    //console.log(sender);
+    //console.log(points[k].sender);
 
-    if(points[k].sender == sender) {
-      console.log("GOT HERE!");
+    //if(points[k].sender == sender) {
+      //console.log("GOT HERE!");
       
       var lat = points[k].lat;
       var lng = points[k].lng;
 
-      if ((Math.abs(c_lat - lat ) <= 0.01 || Math.abs(c_lng - lng) <= 0.01)) {
+      if ((Math.abs(c_lat - lat ) <= 0.001 || Math.abs(c_lng - lng) <= 0.001)) {
         prev_lat = c_lat;
         prev_lng = c_lng;
       }
       randomPoints.push(new google.maps.LatLng(lat,lng));
-    }
+    //}
   }
 }
 
@@ -374,10 +393,13 @@ function updatePoints(){
     prev_lng = currentPoint.lng();
 
     // Add point to firebase
-    data.lat = prev_lat;
-    data.lng = prev_lng;
+    point_data.lat = prev_lat;
+    point_data.lng = prev_lng;
 
-    refPoints.push(data);
+    if (refPoints != null) {
+      refPoints.push(point_data);
+      console.log("data pushed?");
+    }
    /* var ref = firebase.push(data, function(err) {
       if (err) {  // Data was not written to firebase.
         console.warn(err);

@@ -42,10 +42,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Allow on https - necessary to use GPS
 if(portNumber != 3000){
 	app.get('*',function(req,res,next){
 	  if(req.headers['x-forwarded-proto']!='https')
-	    res.redirect('https://mypreferreddomain.com'+req.url)
+	    res.redirect('https://ferret.herokuapp.com'+req.url)
 	  else
 	    next() /* Continue to other routes if we're not redirecting */
 	});
