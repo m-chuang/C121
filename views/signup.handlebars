@@ -3,38 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
     <link href="/images/favicon.ico?" rel="icon" type="image/x-icon">
     
-    <title>Ferret Login</title>
-    <link href="/css/login.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.css" rel="stylesheet" media="screen">
-
+    <title>Ferret</title>
 
     <!-- LINKING TO FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 
-    <!-- All the files that are required -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <!-- JAVASCRIPT VALIDATION -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    
+
+    <!-- CSS STYLING -->
+    <link href="assets/css/main.css" rel="stylesheet"><noscript>
+    <link href="assets/css/noscript.css" rel="stylesheet"></noscript>
   </head>
 
-  <body>
-  
-    <link rel="stylesheet" href="/css/login.css">
-    <!-- FONT -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <body class="is-loading">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-
-    <div class="text-center" style="padding:50px 0" data-role="main">
-      <div class="logo">welcome to ferret</div>
+      <!-- Main -->
+      <section id="main">
+        <header>
+          <span class="avatar"><a class="navbar-brand" href="./"><img alt="" src="/images/avatar.jpg"></a></span>
+          <h1>Ferret</h1>
+          <p>Explore with us</p>
+        </header>
 
       <!-- Main Form -->
       <div class="login-form-1">
@@ -46,30 +42,55 @@
                 <label for="lg_email" class="sr-only">Email</label>
                 <input type="text" class="form-control" id="lg_email" name="lg_email" placeholder="email">
               </div>
+
+              <br> 
+
               <div class="form-group">
                 <label for="lg_password" class="sr-only">Password</label>
                 <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
               </div>
+              
+              <br>
+
               <div class="form-group">
                 <label for="lg_password_confirm" class="sr-only">Confirm Password</label>
                 <input type="password" class="form-control" id="lg_password_confirm" name="lg_password" placeholder="confirm password">
               </div>
-
             </div>
+
+            <br>
+
             <p class="requirement">
-              password must be at least 6 characters
+              Your password must be at least 6 characters
             </p>
             <p id="message"></p>
-            <button type="submit" class="login-button" id="lg_button_signup">Go!</button>
+            <button type="submit" class="login-button" id="lg_button_signup">Register</button>
             
           </div>
 
         </div>
       </div>
-        <!-- end:Main Form -->
-    </div>
+      <!-- end:Main Form -->
+
+    </section>
    
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="copyright">
+          <li>&copy; Ferret Inc.</li><li>A COGS 121 Project</li>
+        </ul>
+
+      </footer>
+    </div>
+
     <!-- Scripts -->
+    <script>
+             if ('addEventListener' in window) {
+               window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+               document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+             }
+    </script> 
+
     <script src="/js/login.js"></script>
   </body>
 </html>

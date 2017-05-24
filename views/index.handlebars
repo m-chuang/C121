@@ -3,81 +3,88 @@
   <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
     <link href="/images/favicon.ico?" rel="icon" type="image/x-icon">
-        
-    <title>Welcome to Ferret</title>
-    <link href="/css/login.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.css" rel="stylesheet" media="screen">
+    
+    <title>Ferret</title>
 
     <!-- LINKING TO FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <!-- JAVASCRIPT VALIDATION -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    
+
+    <!-- CSS STYLING -->
+    <link href="assets/css/main.css" rel="stylesheet"><noscript>
+    <link href="assets/css/noscript.css" rel="stylesheet"></noscript>
   </head>
 
-  <body>
-     <!-- <div>
+  <body class="is-loading">
 
-        <form class="form-login">
-          <input type="text" class="form-input-email" placeholder="Email Address"></input>
-          <input type="password" class="input-block-level" placeholder="Password"></input>
-          <a href="login"><button type="submit">Login</button></a>
-        </form> 
-        
-      </div> -->
-    <link rel="stylesheet" href="/css/login.css">
-    <!-- FONT -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      <!-- Main -->
+      <section id="main">
+        <header>
+          <span class="avatar"><a class="navbar-brand" href="./"><img alt="" src="/images/avatar.jpg"></a></span>
+          <h1>Ferret</h1>
+          <p>Explore with us</p>
+        </header>
 
+        <!-- Main Form -->
+        <div class="login-form-1">
+          <div class="text-left" id="login-form">
+            <div class="main-login-form">
+              <div class="login-group">
+                <div class="form-group">
+                  <label class="sr-only" for="lg_email">Email</label> <input class="form-control" id="lg_email" name="lg_email" placeholder="email" type="text">
+                </div>
 
-    <div class="text-center" style="padding:50px 0" data-role="main">
-      <div class="logo">welcome to ferret</div>
+                <br>
+                
+                <div class="form-group">
+                  <label class="sr-only" for="lg_password">Password</label> <input class="form-control" id="lg_password" name="lg_password" placeholder="password" type="password">
+                </div>
 
-      <!-- Main Form -->
-      <div class="login-form-1">
-        <div id="login-form" class="text-left">
-          
-          <div class="main-login-form">
-            <div class="login-group">
-              <div class="form-group">
-                <label for="lg_email" class="sr-only">Email</label>
-                <input type="text" class="form-control" id="lg_email" name="lg_email" placeholder="email">
-              </div>
-              <div class="form-group">
-                <label for="lg_password" class="sr-only">Password</label>
-                <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
-              </div>
-              <!-- **** Not to implement -maybe later ****
-              <div class="form-group login-group-checkbox">
-                <input type="checkbox" id="lg_remember" name="lg_remember">
-                <label for="lg_remember">remember</label>
-              </div>
-              -->
+                <br>
+
+              </div><button class="button" id="lg_button" type="submit">Login</button>
             </div>
-            <button type="submit" class="login-button" id="lg_button">Login</button>
+
+            <br>
+
+            <div class="etc-login-form">
+              <!-- <p>forgot your password? <a href="#">click here</a></p> -->
+              <p>new user? <a href="signup" id="lg_signup">create an account</a></p>
+            </div>
+
+            <p id="message"></p>
+
           </div>
-          <!-- **** TODO later - leave here for now **** -->
-          <div class="etc-login-form">
-            <p>forgot your password? <a href="#">click here</a></p>
-            <p>new user? <a href="signup" id="lg_signup">create new account</a></p>
-          </div>
-          <p id="message"></p>
         </div>
-      </div>
         <!-- end:Main Form -->
+
+      </section>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <ul class="copyright">
+          <li>&copy; Ferret Inc.</li><li>A COGS 121 Project</li>
+        </ul>
+
+      </footer>
     </div>
-   
+
     <!-- Scripts -->
+    <script>
+             if ('addEventListener' in window) {
+               window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+               document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+             }
+    </script> 
+     
     <script src="/js/login.js"></script>
+
   </body>
 </html>
