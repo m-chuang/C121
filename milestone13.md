@@ -12,7 +12,7 @@ For this milestone, I worked on finishing the avatar page functionality. Specifi
 
 
 ### Tina ###
-.
+I worked on displaying a "?" button that the user can click on the map page to see a popup of some starting information about the app. I also worked on writing some FAQ to display on our Help page.
 
 # Screenshot #
 ![screenshot](/images/milestones/AvatarPage.png)
