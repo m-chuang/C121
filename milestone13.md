@@ -1,7 +1,7 @@
 # Team Member Contributions #
 
 ### Ashley ###
-.
+For this milestone, I worked on a more efficient way for Geo tracking. Our project now uses GPS in order to track the user's location. Our project is also now secure (uses only https). I also restructured our Firebase database to store the user's location and items in a more efficicent matter. Our firebase now structures data based on user id instead of entry id. 
 
 ### Michael ###
 For this milestone, I began a system to keep track of a user's stats through Firebase. This system will ultimately implement the core functions of quest tracking, item tracking, and user progress. In addition to these changes, I began updating our website's overall UI. One common remark was that our website looked very "stock"-like. As such, i've begun to add small UI/UX changes starting with our home and registration pages, which you can find below.
