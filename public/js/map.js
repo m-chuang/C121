@@ -299,13 +299,12 @@ function HelpControl(controlDiv, map) {
 
   // Setup the click event listeners.
   controlUI.addEventListener('click', function() {
-    /*map.setCenter(center);*/
-    console.log("do help stuff");
-    helpinfowindow.setPosition(defaultCenter.latLng); // PLS FIX TO BE ABOVE THE FERRET
+    var helpTemp = marker.getPosition();
+    helpinfowindow.setPosition(helpTemp);
     helpinfowindow.setContent('Your ferret avatar marks your current location. Explore around and uncover the<br>'
       + 'green grass to keep track of everywhere that you have visited. You may also see<br>'
       + 'mystery items on the map that you can pick up and use to dress up your avatar.');
-    helpinfowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
+    helpinfowindow.setOptions({pixelOffset: new google.maps.Size(0,-70)});
     helpinfowindow.open(map);
   });
 }
