@@ -1,5 +1,5 @@
 ### Ferret 
- **Ferret**- *explore the world, discover yourself!*
+*Explore with us*
 
  Ferret is an exploration game centered around local point of interest discovery and user data tracking. We want people to be motivated to go out and explore, and our map's visual representation of places a user has been is unique to us. In addition to presenting a user with data, we have an avatar system featuring a ferret that you can dress up with items to collect based on locations you visit, such as flip flops for the beach.
 

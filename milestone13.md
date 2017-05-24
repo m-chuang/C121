@@ -4,7 +4,7 @@
 .
 
 ### Michael ###
-.
+For this milestone, I began a system to keep track of a user's stats through Firebase. This system will ultimately implement the core functions of quest tracking, item tracking, and user progress. In addition to these changes, I began updating our website's overall UI. One common remark was that our website looked very "stock"-like. As such, i've begun to add small UI/UX changes starting with our home and registration pages, which you can find below.
 
 
 ### Scott ###
@@ -22,3 +22,8 @@ Screenshot of the avatar page with completed functionality
 Screenshot of the save avatar functionality
 TODO
 
+![screenshot](/images/milestones/milestone13_index.png)
+This is what our new homepage looks like.
+
+![screenshot](/images/milestones/milestone13_registration.png)
+This is what our new registration page looks like.
