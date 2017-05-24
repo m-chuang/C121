@@ -9,6 +9,7 @@ var errorCircle;
 var center;
 var zoomLevel;
 var randomPoints;
+var helpinfowindow;
 
 // HEATMAP AND FIREBASE - location 
 var prev_lat = 0;
@@ -175,7 +176,20 @@ function initMap() {
   });
 
 
+  // CREATE HELP BUTTON
+  var helpControlDiv = document.createElement('div');
+  var helpControl = new HelpControl(helpControlDiv, map);
 
+  helpControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(helpControlDiv);
+
+  // CREATE INFOWINDOW FOR HELP
+  helpinfowindow = new google.maps.InfoWindow();
+
+  // CLOSE HELP INFOWINDOW ON CLICKAWAY
+  google.maps.event.addListener(map, "click", function(event) {
+      helpinfowindow.close();
+  });
 }
 
   // INITIALIZE FIREBASE
@@ -260,14 +274,52 @@ function CenterControl(controlDiv, map) {
   controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
   controlText.style.fontSize = '16px';
   controlText.style.lineHeight = '38px';
-  controlText.style.paddingLeft = '5px';
-  controlText.style.paddingRight = '5px';
+  controlText.style.paddingLeft = '10px';
+  controlText.style.paddingRight = '10px';
   controlText.innerHTML = 'Center at Current Location';
   controlUI.appendChild(controlText);
 
   // Setup the click event listeners.
   controlUI.addEventListener('click', function() {
     map.setCenter(center);
+  });
+}
+
+//////////////////// HELP CONTROLS ////////////////////
+function HelpControl(controlDiv, map) {
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginTop = '20px';
+  controlUI.style.marginLeft = '20px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Get Started';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '28px';
+  controlText.style.paddingLeft = '10px';
+  controlText.style.paddingRight = '10px';
+  controlText.innerHTML = '?';
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners.
+  controlUI.addEventListener('click', function() {
+    var helpTemp = marker.getPosition();
+    helpinfowindow.setPosition(helpTemp);
+    helpinfowindow.setContent('Your ferret avatar marks your current location. Explore around and uncover the<br>'
+      + 'green grass to keep track of everywhere that you have visited. You may also see<br>'
+      + 'mystery items on the map that you can pick up and use to dress up your avatar.');
+    helpinfowindow.setOptions({pixelOffset: new google.maps.Size(0,-70)});
+    helpinfowindow.open(map);
   });
 }
 

@@ -56,7 +56,7 @@
           	const promise = auth.createUserWithEmailAndPassword(email,password);
           	promise.catch(e => console.log(e.message)); 
           } else {
-             document.getElementById('message').innerHTML = "Passwords do not match!";
+             document.getElementById('message').innerHTML = "Your passwords do not match";
           }
 
         });

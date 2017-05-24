@@ -107,12 +107,15 @@ function restore(){
 }
 
 function saveAvatar(){
-  //var canvas = document.getElementById("avatarCanvas");
-  var Vcanvas = document.createElement("CANVAS");
+  var canvas = document.getElementById("avatarCanvas");
+  document.write('<img src="'+canvas.toDataURL("image/png")+'"/>')
+
+  /*var Vcanvas = document.createElement("CANVAS");
   Vcanvas.height = "284";
   Vcanvas.width = "486";
   var Vctx = Vcanvas.getContext("2d");
 
+  
   var imgObj = new Image();
 	var newString = String("/images/avatar/Ferret.png");
 	imgObj.src = newString;
@@ -123,6 +126,7 @@ function saveAvatar(){
 	  	console.log(Vcanvas.toDataURL("image/png"));
   		document.write('<img src="'+Vcanvas.toDataURL("image/png")+'"/>')
 	}
+	*/
 
 
 }
