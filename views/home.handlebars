@@ -6,6 +6,16 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="/images/favicon.ico?" rel="icon" type="image/x-icon">
+
+    <title>Ferret</title>
+
+    <!-- LINKING TO FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+
+    <!-- CSS STYLING -->
+    <link rel="stylesheet" href="assets2/css/main.css" />
+    <!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->
+
     <style>
        html {
            height: 100%;
@@ -30,81 +40,46 @@
            height: 100%;
        }
     </style>
-
-    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-
-    <title>Ferret</title>
-
-    <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/hovereffect.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 </head>
 
 
 <body>
-    <div id="navbar">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle Navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="/home">Ferret</a>
-                </div>
-            </div>
+    <div id="page-wrapper">
+      <!-- Header -->
+        <header id="header" class="alt">
+          <nav>
+            <a href="#menu">Menu</a>
+          </nav>
+        </header>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <nav class="navbar navbar-default navbar-fixed-top" id="mainNav">
-                <div class="container-fluid">
-                    
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle Navigation</span> Menu <i class="fa fa-bars"></i></button> <a class="navbar-brand page-scroll" href="/home">Ferret</a>
-                    </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="/home"><b>Map</b></a>
-                            </li>
-                            <li>
-                                <a href="/quests"><b>Quests</b></a>
-                            </li>
-                            <li>
-                                <a href="/avatar"><b>Avatar</b></a>
-                            </li>
-                            <li>
-                                <a href="/stats"><b>Stats</b></a>
-                            </li>
-                            <li>
-                                <a href="/help"><b>Help</b></a>
-                            </li>
-                            <li>
-                                <a href="" id="lg_signout"><b>Sign Out</b></a>
-                            </li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
+      <!-- Menu -->
+        <nav id="menu">
+          <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+              <li><a href="/home">Home</a></li>
+              <li><a href="/quests">Quests</a></li>
+              <li><a href="/avatar">Avatar</a></li>
+              <li><a href="/stats">Stats</a></li>
+              <li><a href="/help">Help</a></li>
+              <li><a href="" id="lg_signout"><b>Sign Out</b></a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+          </div>
         </nav>
-    </div><!-- /.container-fluid -->
-
-    <!-- END HEADER -->
-
-
-    <!-- START CONTENT CONTAINER HERE -->
+    </div>
 
     <div id="map"></div>
 
-    <!-- END CONTENT CONTAINER HERE -->
-
-
     <!-- JavsScript -->
+    <script src="assets2/js/skel.min.js"></script>
+    <script src="assets2/js/jquery.min.js"></script>
+    <script src="assets2/js/jquery.scrollex.min.js"></script>
+    <script src="assets2/js/util.js"></script>
+    <script src="assets2/js/main.js"></script>    
+
     <script src="/js/map.js"></script> 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSeT5rOlsjBJr1kBi0heKYx2qHq_EnjXM&libraries=visualization&callback=initMap">
-    </script> 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSeT5rOlsjBJr1kBi0heKYx2qHq_EnjXM&libraries=visualization&callback=initMap"></script> 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">

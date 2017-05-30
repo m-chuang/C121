@@ -10,6 +10,7 @@ var center;
 var zoomLevel;
 var randomPoints;
 var helpinfowindow;
+var currentPoint;
 
 // HEATMAP AND FIREBASE - location 
 var prev_lat = 0;
@@ -18,8 +19,7 @@ var data = {  // change to not have sender - change structure in ref from 'point
   sender: null,  // change to have '{uid}/points' and '{uid}/items'
   //timestamp: null,
   lat: null,
-  lng: null
- 
+  lng: null 
 };
 var user;
 var point_data = {
@@ -35,10 +35,17 @@ var database;
 var refPoints; // Will refer to the {uid}/points child in firebase
 var refItems; // Will refer to the {uid}/items child in firebase
 var sender;
-//////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
-autoUpdate();
 
-
+// MAP STYLING
+var myStyles =[
+    {
+        featureType: "poi",
+        elementType: "labels",
+        stylers: [
+              { visibility: "off" }
+        ]
+    }
+];
 
 //////////////////// MAP INITIALIZATION ////////////////////
 function initMap() {
@@ -50,15 +57,16 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18,                   // default zoom level
     center: defaultCenter,      // center map at default location
-    //disableDefaultUI: true,     // disable UI buttons
     streetViewControl: false,   // disable Street View
     clickableIcons: false,      // disable default Google POIs
     draggable: true,            // DEBUG: set to true
-    maxZoom: 18,                // DO NOT CHANGE
-    //minZoom: 18,                // DEBUG: change to 1
+    maxZoom: 18,                // DO NOT CHANGE    
+    //minZoom: 18,              // DEBUG: change to 1
+    fullscreenControl: false,
+    mapTypeControl: false,
+    styles: myStyles, 
   });
   
-
 
   randomPoints = new google.maps.MVCArray([]);
   
@@ -73,6 +81,35 @@ function initMap() {
   changeOpacity();
   changeRadius();
   
+
+  // GET CURRENT LOCATION
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      // Print to console the coordinates of the current location
+      console.log("curr lat=" + pos.lat + ", lng=" + pos.lng);
+
+      // CLEAR HEATMAP AT CURRENT LOCATION (MAYBE - given it's undiscovered location)
+      updatePoints();    
+
+      // Center map at current location
+      map.setCenter(pos);
+      center = pos;
+
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    }, {maximumAge: 600000, timeout: 10000, enableHighAccuracy: true}); // Enable high accuracy - GPS
+  } 
+  else {
+      // Center at default location
+      map.setCenter(defaultCenter);
+      handleLocationError(false, infoWindow, map.getCenter());
+  }
+
   // Get Data URL for avatar ferret //
   // Load images by URL onto the canvas
   var virtualCanvas = document.createElement("CANVAS");
@@ -115,35 +152,6 @@ function initMap() {
   loadImg("/images/avatar/shoes/BlueSocks.png"  );
 
 
-  // GET CURRENT LOCATION
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-
-      // Print to console the coordinates of the current location
-      console.log("curr lat=" + pos.lat + ", lng=" + pos.lng);
-
-      // CLEAR HEATMAP AT CURRENT LOCATION (MAYBE - given it's undiscovered location)
-      updatePoints();    
-
-      // Center map at current location
-      map.setCenter(pos);
-      center = pos;
-
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    }, {maximumAge: 600000, timeout: 5000, enableHighAccuracy: true}); // Enable high accuracy - GPS
-  } 
-  else {
-      // Center at default location
-      map.setCenter(defaultCenter);
-      handleLocationError(false, infoWindow, map.getCenter());
-  }
-
-
   // CREATE INFOWINDOW FOR ITEMS
   var infowindow = new google.maps.InfoWindow();
 
@@ -161,7 +169,8 @@ function initMap() {
 
   map.data.addListener('click', function(event) {
     infowindow.setPosition(event.latLng);
-    infowindow.setContent(event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"<br /> <br />"+'<center><button onclick="infowindow.close();">Pick Up Item</button></center>');
+    infowindow.setContent("<font color=black>"+event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"</font>");
+    //infowindow.setContent("<font color=black>"+event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"<br /> <br />"+'<center><button onclick="infowindow.close()"><font color=black>Pick Up Item</font></button></center>' +"</font>");
     infowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
     infowindow.open(map);
   });
@@ -169,6 +178,11 @@ function initMap() {
   // CLOSE ITEM INFOWINDOW ON CLICKAWAY
   google.maps.event.addListener(map, "click", function(event) {
       infowindow.close();
+  });
+
+  // MAKE ITEM DISAPPEAR ONCLICK
+  map.data.addListener('click', function(event) {
+     map.data.overrideStyle(event.feature, {visible: false});
   });
 
 
@@ -192,7 +206,7 @@ function initMap() {
   var helpControl = new HelpControl(helpControlDiv, map);
 
   helpControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.LEFT_TOP].push(helpControlDiv);
+  map.controls[google.maps.ControlPosition.LEFT_CENTER].push(helpControlDiv);
 
   // CREATE INFOWINDOW FOR HELP
   helpinfowindow = new google.maps.InfoWindow();
@@ -203,8 +217,12 @@ function initMap() {
   });
 }
 
-  // INITIALIZE FIREBASE
-  initFirebase();
+// INITIALIZE FIREBASE
+initFirebase();
+
+//////////////////// CONTINUOUSLY UPDATE LOCATION ////////////////////
+autoUpdate();
+
 
 //////////////////// LOCATION UPDATER ////////////////////
 function autoUpdate() {
@@ -215,6 +233,9 @@ function autoUpdate() {
     // LOCATION MARKER UPDATER
     if (marker) {
       marker.setPosition(newPoint);
+      if(!currentPoint){
+        map.setCenter(newPoint);
+      }
 
     }
     else {
@@ -224,26 +245,6 @@ function autoUpdate() {
         map: map
       });
     }
-
-
-    // ERROR RANGE UPDATER
-    /*
-    if(errorCircle){
-      errorCircle.setMap(null);
-    }
-    else {
-      errorCircle = new google.maps.Circle({
-        strokeColor: '#1976D2',
-        strokeOpacity: 0.8,
-        strokeWeight: 3,
-        fillColor: '#1976D2',
-        fillOpacity: 0.35,
-        map: map,
-        center: newPoint,
-        radius: 100
-    })
-    }
-    */
 
   });
 
@@ -444,10 +445,11 @@ function errData(err) {
   console.log('Error!');
   console.log(err);
 }
+
 //////////////////// LOCATION POINTS Updater ////////////////////
 function updatePoints(){
-  var currentPoint = marker.getPosition();
-  
+  currentPoint = marker.getPosition();
+
   
   if ((Math.abs(currentPoint.lat() - prev_lat ) > 0.0001 || Math.abs(currentPoint.lng() - prev_lng) > 0.0001)) { //} || (count < 3))  {
     console.log("GOT HERE TOO!")
