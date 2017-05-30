@@ -97,12 +97,14 @@ function initMap() {
         //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
       };
 
+      /*console.log(icon);
+
       // CURRENT LOCATION MARKER INITIALIZATION (FERRET IMAGE)
       marker = new google.maps.Marker({
         position: defaultCenter,
         icon: icon,
         map: map
-      });
+      });*/
     }
   }
 
@@ -147,6 +149,15 @@ function initMap() {
 
   // ITEM HANDLING
   map.data.loadGeoJson('https://gist.githubusercontent.com/m-chuang/b65045add0fbf8e537b654a7d383940f/raw/bd352f28714d7d3d41666f7683a46ea51f1bed72/map.geojson');
+
+  var itemMarkers = {
+  	url: "/images/mystery.png",
+  	scaledSize: new google.maps.Size(30, 30) // scaled smaller
+  }
+
+  map.data.setStyle({
+  	icon: itemMarkers
+  });
 
   map.data.addListener('click', function(event) {
     infowindow.setPosition(event.latLng);
