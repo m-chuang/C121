@@ -320,16 +320,16 @@ function HelpControl(controlDiv, map) {
   controlText.style.lineHeight = '28px';
   controlText.style.paddingLeft = '10px';
   controlText.style.paddingRight = '10px';
-  controlText.innerHTML = '?';
+  controlText.innerHTML = 'Help';
   controlUI.appendChild(controlText);
 
   // Setup the click event listeners.
   controlUI.addEventListener('click', function() {
     var helpTemp = marker.getPosition();
     helpinfowindow.setPosition(helpTemp);
-    helpinfowindow.setContent('Your ferret avatar marks your current location. Explore around and uncover the<br>'
+    helpinfowindow.setContent('<font color=black>Your ferret avatar marks your current location. Explore around and uncover the<br>'
       + 'green grass to keep track of everywhere that you have visited. You may also see<br>'
-      + 'mystery items on the map that you can pick up and use to dress up your avatar.');
+      + 'mystery items on the map that you can pick up and use to dress up your avatar.</font>');
     helpinfowindow.setOptions({pixelOffset: new google.maps.Size(0,-70)});
     helpinfowindow.open(map);
   });
