@@ -12,9 +12,30 @@ var shoesUrl = "/images/avatar/shoes/BlueSocks.png";
 var savedHatUrl;
 var savedShirtUrl;
 var savedShoesUrl;
+
+//until the actual data is inputted
+var dummy_item_data = {
+  item0: 1,
+  item1: 0,
+  item2: 0,
+  item3: 1,
+  item4: 0,
+  item5: 0,
+  item6: 0,
+  item7: 1,
+  item8: 0,
+  item9: 0,
+  item10: 0,
+  item11: 0,
+  item12: 1,
+  item13: 1,
+  item14: 0,
+  item15: 0,
+}
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	//loadTabColors();
+	loadAvatars();
 
 	// load base ferret avatar
 	avatarBase = loadImg("/images/avatar/Ferret.png");
@@ -23,6 +44,7 @@ $(document).ready(function() {
 	loadImg(shirtUrl);
 	loadImg(hatUrl);
 	save();
+
 	// One way to change an image
 	//shoes.src = "/images/avatar/shoes/RedSneakers.png";
 
@@ -130,6 +152,8 @@ function saveAvatar(){
 
 
 }
+
+
 // load each inventory tab's background color
 /*function loadTabColors() {
 	var tabs = document.getElementsByClassName("tab");
@@ -148,3 +172,74 @@ function selectTab(tabNum) {
 	inventorybg.style.backgroundColor = tabColorArr[tabNum];
 	inventorybg.innerHTML = tabNum;
 }*/
+
+function loadAvatars(){
+	console.log(document.getElementById("all_items"));
+	for (avatar in dummy_item_data) {
+		var avatarPath;
+
+		var htmlpart1 = "<div class='col-xs-4 col-sm-2'> <a href='#' onclick= \" updateAvatar(this.children[0].src,'hats'); return false; \" ><img src=";
+		var htmlpart2 = " width='100px' height='100px'></img></a></div>"
+
+
+		switch(avatar){
+			case "item0":
+				avatarPath = " '/images/avatar/icons/CowboyHat.png'";
+				break;
+			case "item1":
+				avatarPath = "'/images/avatar/icons/PropellerHat.png'"
+				break;
+			case "item2":
+				avatarPath = "'/images/avatar/icons/GraduationCap.png'";
+				break;
+			case "item3":
+				avatarPath = "'/images/avatar/icons/MagicalHat.png'";
+				break;
+			case "item4":
+				avatarPath = "'/images/avatar/icons/SunHat.png'";
+				break;
+			case "item5":
+				avatarPath = "'/images/avatar/icons/TopHat.png'";
+				break;
+			case "item6":
+				avatarPath = "'/images/avatar/icons/BabyBlueShirt.png'";
+				break;
+			case "item7":
+				avatarPath = "'/images/avatar/icons/BlueShirtWhiteTrim.png'";
+				break;
+			case "item8":
+				avatarPath = "'/images/avatar/icons/GreenStripeShirt.png'";
+				break;
+			case "item9":
+				avatarPath = "'/images/avatar/icons/LeatherShirtWhiteTrim.png'";
+				break;
+			case "item10":
+				avatarPath = "'/images/avatar/icons/PeachPolkaDotShirt.png'";
+				break;
+			case "item11":
+				avatarPath = "'/images/avatar/icons/BlueSocks.png'";
+				break;
+			case "item12":
+				avatarPath = "'/images/avatar/icons/BrownBoots.png'";
+				break;
+			case "item13":
+				avatarPath = "'/images/avatar/icons/GreenSneakers.png'";
+				break;
+			case "item14":
+				avatarPath = "'/images/avatar/icons/RedSneakers.png'";
+				break;
+			case "item15":
+				avatarPath = "'/images/avatar/icons/RedSocks.png'";
+				break;	
+		}
+		
+		if( dummy_item_data[avatar] == 1){
+			var path = htmlpart1 + avatarPath + htmlpart2;
+
+			document.getElementById("all_items").innerHTML += path;
+		} 
+		else{
+
+		}
+	}
+}
