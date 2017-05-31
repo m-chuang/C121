@@ -15,12 +15,7 @@ var currentPoint;
 // HEATMAP AND FIREBASE - location 
 var prev_lat = 0;
 var prev_lng = 0;
-var data = {  // change to not have sender - change structure in ref from 'points' to 'uid/points'
-  sender: null,  // change to have '{uid}/points' and '{uid}/items'
-  //timestamp: null,
-  lat: null,
-  lng: null 
-};
+
 var user;
 var point_data = {
   lat: null,
@@ -28,13 +23,50 @@ var point_data = {
 }
 // Will store item data -- stored in refItems
 var item_data = {
-  item: null
+  item0: 0,
+  item1: 0,
+  item2: 0,
+  item3: 0,
+  item4: 0,
+  item5: 0,
+  item6: 0,
+  item7: 0,
+  item8: 0,
+  item9: 0,
+  item10: 0,
+  item11: 0,
+  item12: 0,
+  item13: 0,
+  item14: 0,
+  item15: 0,
+}
+
+// Item map
+var item_map = {
+  CowboyHat: 0,
+  PropellerHat: 1,
+  GraduationCap: 2,
+  MagicalHat: 3,
+  SunHat: 4,
+  TopHat:5, 
+  BabyBlueShirt: 6,
+  BlueShirtWhiteTrim: 7,
+  GreenStripeShirt: 8,
+  LeatherShirtWhiteTrim: 9,
+  PeachPolkaDotShirt: 10,
+  BlueSocks: 11,
+  BrownBoots: 12,
+  GreenSneakers: 13,
+  RedSneakers: 14,
+  RedSocks: 15
 }
 //var item_data = {}
 var database;
 var refPoints; // Will refer to the {uid}/points child in firebase
 var refItems; // Will refer to the {uid}/items child in firebase
 var sender;
+var user_items;
+var user_key;
 
 // MAP STYLING
 var myStyles =[
@@ -364,9 +396,18 @@ function initFirebase() {
 
           // console.log(firebase.child);
           sender = firebaseUser.uid;
-          console.log(sender);
+        
+          /* LOADING USER'S POINTS */
+          // Creating reference to user's points
           refPoints = database.ref(sender+"/points");
           loadPoints();
+
+          /* LOADING USER'S ITEMS */
+          // Creating reference to user's items
+          refItems = database.ref(sender+"/items")
+          // Retrieving user's items - will get saved in user_items, key will get saved in user_key
+          var item1 = refItems.on('value',getItemVal,errData);
+        
           
         } else {
           console.log('not logged in');
@@ -376,7 +417,64 @@ function initFirebase() {
   
 }
 
+/*
+  Called by refItems.on(..)
+  This function retrieves the user's item data and stores it
+  in global variable 'user_items' which can be used in the rest of map.js.
+  It also stores the items' key in global var 'user_key', which is necessary
+  to perform updates to the data.
+*/
+function getItemVal(data) {
+  // Retrieving data if any
+  var items_data = data.val();
+  
 
+  // Check if new user - has no real items reference key
+  if (items_data == null)
+  {
+    refItems.push(item_data);
+  }
+  // Returning user - has items reference key
+  else 
+  {
+    var keys = Object.keys(items_data);
+    user_key = keys[0];
+
+
+    //retrieve data
+    user_items = {
+        item0: items_data[user_key].item0,
+        item1: items_data[user_key].item1,
+        item2: items_data[user_key].item2,
+        item3: items_data[user_key].item3,
+        item4: items_data[user_key].item4,
+        item5: items_data[user_key].item5,
+        item6: items_data[user_key].item6,
+        item7: items_data[user_key].item7,
+        item8: items_data[user_key].item8,
+        item9: items_data[user_key].item9,
+        item10: items_data[user_key].item10,
+        item11: items_data[user_key].item11,
+        item12: items_data[user_key].item12,
+        item13: items_data[user_key].item13,
+        item14: items_data[user_key].item14,
+        item15: items_data[user_key].item15
+    }
+  }
+ 
+}
+
+/*
+  Adds item to user's item list! 
+*/
+function addItem(index) {
+  // Only need reference to make this work - need to store key globally
+  user_items["item"+index] = 1;
+  var update = {};
+  update[user_key] = user_items;
+  refItems.update(update);
+  console.log("Updated items: "+ user_items);
+}
 
 //////////////////// LOCATION POINTS GENERATOR ////////////////////
 function generateRandomPoints(){
@@ -412,7 +510,7 @@ function loadPoints() {
 }
 
 function getPoints(data) {
-  console.log(data.val());
+  console.log("DATA: "+data.val());
   var points = data.val();
   var keys = Object.keys(points);
   var currentPoint = marker.getPosition();
