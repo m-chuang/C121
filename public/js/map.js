@@ -77,17 +77,6 @@ var user_items;
 var user_key;
 var user_avatarItemsKey;
 
-// MAP STYLING
-var myStyles =[
-    {
-        featureType: "poi",
-        elementType: "labels",
-        stylers: [
-              { visibility: "off" }
-        ]
-    }
-];
-
 
 
 //////////////////// MAP INITIALIZATION ////////////////////
@@ -666,6 +655,8 @@ function changeRadius() {
   heatmap.set('radius', heatmap.get('radius') ? null : 50);
 }
 
+
+// MAP STYLING
 var terrainStyle = [
   {
     "elementType": "geometry",
@@ -733,6 +724,15 @@ var terrainStyle = [
     "stylers": [
       {
         "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
