@@ -208,67 +208,84 @@ function selectTab(tabNum) {
 }*/
 
 function loadAvatars(){
-	console.log(document.getElementById("all_items"));
 	for (avatar in user_items) {
 		var avatarPath;
 
-		var htmlpart1 = "<div class='col-xs-4 col-sm-2'> <a href='#' onclick= \" updateAvatar(this.children[0].src,'hats'); return false; \" ><img src=";
-		var htmlpart2 = " width='100px' height='100px'></img></a></div>"
+		var htmlpart1 = "<div class='col-xs-4 col-sm-2'> <a href='#' onclick= \" updateAvatar(this.children[0].src,'";
+		var htmlpart2 = "'); return false; \" ><img src="
+		var htmlpart3 = " width='100px' height='100px'></img></a></div>"
+		var avatarType = "";
 
 
 		switch(avatar){
 			case "item0":
 				avatarPath = " '/images/avatar/icons/CowboyHat.png'";
+				avatarType = "hats";
 				break;
 			case "item1":
-				avatarPath = "'/images/avatar/icons/PropellerHat.png'"
+				avatarPath = "'/images/avatar/icons/PropellerHat.png'";
+				avatarType = "hats";
 				break;
 			case "item2":
 				avatarPath = "'/images/avatar/icons/GraduationCap.png'";
+				avatarType = "hats";
 				break;
 			case "item3":
 				avatarPath = "'/images/avatar/icons/MagicalHat.png'";
+				avatarType = "hats";
 				break;
 			case "item4":
 				avatarPath = "'/images/avatar/icons/SunHat.png'";
+				avatarType = "hats";
 				break;
 			case "item5":
 				avatarPath = "'/images/avatar/icons/TopHat.png'";
+				avatarType = "hats";
 				break;
 			case "item6":
 				avatarPath = "'/images/avatar/icons/BabyBlueShirt.png'";
+				avatarType = "shirts";
 				break;
 			case "item7":
 				avatarPath = "'/images/avatar/icons/BlueShirtWhiteTrim.png'";
+				avatarType = "shirts";
 				break;
 			case "item8":
 				avatarPath = "'/images/avatar/icons/GreenStripeShirt.png'";
+				avatarType = "shirts";
 				break;
 			case "item9":
 				avatarPath = "'/images/avatar/icons/LeatherShirtWhiteTrim.png'";
+				avatarType = "shirts";
 				break;
 			case "item10":
 				avatarPath = "'/images/avatar/icons/PeachPolkaDotShirt.png'";
+				avatarType = "shirts";
 				break;
 			case "item11":
 				avatarPath = "'/images/avatar/icons/BlueSocks.png'";
+				avatarType = "shoes";
 				break;
 			case "item12":
 				avatarPath = "'/images/avatar/icons/BrownBoots.png'";
+				avatarType = "shoes";
 				break;
 			case "item13":
 				avatarPath = "'/images/avatar/icons/GreenSneakers.png'";
+				avatarType = "shoes";
 				break;
 			case "item14":
 				avatarPath = "'/images/avatar/icons/RedSneakers.png'";
+				avatarType = "shoes";
 				break;
 			case "item15":
 				avatarPath = "'/images/avatar/icons/RedSocks.png'";
+				avatarType = "shoes";
 				break;	
 		}
 		
 		if( user_items[avatar] == 1){
-			var path = htmlpart1 + avatarPath + htmlpart2;
+			var path = htmlpart1 + avatarType + htmlpart2 + avatarPath + htmlpart3;
 
 			document.getElementById("all_items").innerHTML += path;
 		} 
