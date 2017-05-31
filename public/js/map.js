@@ -318,12 +318,12 @@ function CenterControl(controlDiv, map) {
   // Set CSS for the control interior.
   var controlText = document.createElement('div');
   controlText.style.color = 'rgb(25,25,25)';
-  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontFamily = 'Source Sans Pro,Helvetica,sans-serif';
   controlText.style.fontSize = '16px';
-  controlText.style.lineHeight = '38px';
+  controlText.style.lineHeight = '30px';
   controlText.style.paddingLeft = '10px';
   controlText.style.paddingRight = '10px';
-  controlText.innerHTML = 'Center at Current Location';
+  controlText.innerHTML = 'Recenter Map';
   controlUI.appendChild(controlText);
 
   // Setup the click event listeners.
@@ -344,15 +344,15 @@ function HelpControl(controlDiv, map) {
   controlUI.style.marginTop = '20px';
   controlUI.style.marginLeft = '20px';
   controlUI.style.textAlign = 'center';
-  controlUI.title = 'Get Started';
+  controlUI.title = 'Help: Get Started';
   controlDiv.appendChild(controlUI);
 
   // Set CSS for the control interior.
   var controlText = document.createElement('div');
   controlText.style.color = 'rgb(25,25,25)';
-  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontFamily = 'Source Sans Pro,Helvetica,sans-serif';
   controlText.style.fontSize = '16px';
-  controlText.style.lineHeight = '28px';
+  controlText.style.lineHeight = '30px';
   controlText.style.paddingLeft = '10px';
   controlText.style.paddingRight = '10px';
   controlText.innerHTML = 'Help';
