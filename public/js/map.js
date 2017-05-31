@@ -77,17 +77,6 @@ var user_items;
 var user_key;
 var user_avatarItemsKey;
 
-// MAP STYLING
-var myStyles =[
-    {
-        featureType: "poi",
-        elementType: "labels",
-        stylers: [
-              { visibility: "off" }
-        ]
-    }
-];
-
 
 
 //////////////////// MAP INITIALIZATION ////////////////////
@@ -253,7 +242,9 @@ function initMap() {
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(helpControlDiv);
 
   // CREATE INFOWINDOW FOR HELP
-  helpinfowindow = new google.maps.InfoWindow();
+  helpinfowindow = new google.maps.InfoWindow({
+    maxWidth: 350
+  });
 
   // CLOSE HELP INFOWINDOW ON CLICKAWAY
   google.maps.event.addListener(map, "click", function(event) {
@@ -371,9 +362,9 @@ function HelpControl(controlDiv, map) {
   controlUI.addEventListener('click', function() {
     var helpTemp = marker.getPosition();
     helpinfowindow.setPosition(helpTemp);
-    helpinfowindow.setContent('<font color=black>Your ferret avatar marks your current location. Explore around and uncover the<br>'
-      + 'green grass to keep track of everywhere that you have visited. You may also see<br>'
-      + 'mystery items on the map that you can pick up and use to dress up your avatar.</font>');
+    helpinfowindow.setContent('<font color=black>Your ferret avatar marks your current location. ' 
+      + 'Explore around and uncover the green grass to keep track of everywhere that you have visited. '
+      + 'You may also see mystery items on the map that you can pick up and use to dress up your avatar.</font>');
     helpinfowindow.setOptions({pixelOffset: new google.maps.Size(0,-70)});
     helpinfowindow.open(map);
   });
@@ -666,6 +657,8 @@ function changeRadius() {
   heatmap.set('radius', heatmap.get('radius') ? null : 50);
 }
 
+
+// MAP STYLING
 var terrainStyle = [
   {
     "elementType": "geometry",
@@ -733,6 +726,15 @@ var terrainStyle = [
     "stylers": [
       {
         "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
