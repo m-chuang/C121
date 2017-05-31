@@ -1,7 +1,9 @@
 # Team Member Contributions #
 
 ### Ashley ###
-.
+For this milestone, I completed the Firebase functionality. We can now succesfully keep a record of what items the user has picked up and we can update it at any point. This record is unique per user, so it won't clutter the firebase with a lot of information, not errously display incorrect items. I also added a structure for items that the avatar is wearing. Therefore, now we can determine what items the user chose to put on the avatar by retrieving the user's avatar_items data.
+
+Additionally, I also made the user able to add an item by clicking on a item marker in the map. If the user clicks on a marker, the item corresponding to that marker will get added on Firebase.
 
 ### Michael ###
 For this milestone I changed the login and registration page styling to be lowercase by request. In addition, I updated the UI of the homepage; rather than having a navigation bar spanning the entire top portion of the page, a hamburger menu is present on the upper right for both desktop and mobile views. This allows more of the map to be visible and present. When the hamburger menu is clicked, a popup overlay covers the map with links to other pages of the website. I relocated the "help" button to be at the middle left of the screen for easier visibility. 
