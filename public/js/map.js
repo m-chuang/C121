@@ -12,6 +12,8 @@ var randomPoints;
 var helpinfowindow;
 var currentPoint;
 
+var infoWindow;
+
 // HEATMAP AND FIREBASE - location 
 var prev_lat = 0;
 var prev_lng = 0;
@@ -60,6 +62,12 @@ var item_map = {
   RedSneakers: 14,
   RedSocks: 15
 }
+
+var avatar_items = {
+  hat: 99,
+  shirt: 99,
+  shoes: 99
+}
 //var item_data = {}
 var database;
 var refPoints; // Will refer to the {uid}/points child in firebase
@@ -67,6 +75,7 @@ var refItems; // Will refer to the {uid}/items child in firebase
 var sender;
 var user_items;
 var user_key;
+var user_avatarItemsKey;
 
 // MAP STYLING
 var myStyles =[
@@ -113,7 +122,6 @@ function initMap() {
   changeOpacity();
   changeRadius();
   
-
   // GET CURRENT LOCATION
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -185,26 +193,26 @@ function initMap() {
 
 
   // CREATE INFOWINDOW FOR ITEMS
-  var infowindow = new google.maps.InfoWindow();
+  infoWindow = new google.maps.InfoWindow();
 
   // ITEM HANDLING
   map.data.loadGeoJson('https://gist.githubusercontent.com/ashleymp/59d075bd2ef1ba1e893a13bc5e58366f/raw/c0bcfe26065629f5d116a05baa2311aee8c89c14/mapItems.geojson');
 
   var itemMarkers = {
-  	url: "/images/mystery.png",
-  	scaledSize: new google.maps.Size(30, 30) // scaled smaller
+    url: "/images/mystery.png",
+    scaledSize: new google.maps.Size(30, 30) // scaled smaller
   }
 
   map.data.setStyle({
-  	icon: itemMarkers
+    icon: itemMarkers
   });
 
   map.data.addListener('click', function(event) {
     infowindow.setPosition(event.latLng);
     infowindow.setContent("<font color=black>"+event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"</font>");
     //infowindow.setContent("<font color=black>"+event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"<br /> <br />"+'<center><button onclick="infowindow.close()"><font color=black>Pick Up Item</font></button></center>' +"</font>");
-    addItem(event.feature.getProperty('item_num'));
-    
+    //addItem(event.feature.getProperty('item_num'));
+
     infowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
     infowindow.open(map);
   });
@@ -407,8 +415,10 @@ function initFirebase() {
           /* LOADING USER'S ITEMS */
           // Creating reference to user's items
           refItems = database.ref(sender+"/items")
+          refAvatar = database.ref(sender+"/avatar");
           // Retrieving user's items - will get saved in user_items, key will get saved in user_key
           var item1 = refItems.on('value',getItemVal,errData);
+          refAvatar.on('value',getAvatarData,errData);
         
           
         } else {
@@ -466,6 +476,32 @@ function getItemVal(data) {
  
 }
 
+function getAvatarData(data) {
+  // Retrieving data if any
+  var avatar_itemData = data.val();
+  
+
+  // Check if new user - has no real items reference key
+  if (avatar_itemData == null)
+  {
+    refAvatar.push(avatar_items);
+  }
+  // Returning user - has items reference key
+  else 
+  {
+    var keys = Object.keys(avatar_itemData);
+    user_avatarItemsKey = keys[0];
+
+
+    //retrieve data
+    avatar_items = {
+        hat: avatar_itemData[user_avatarItemsKey].hat,
+        shirt: avatar_itemData[user_avatarItemsKey].shirt,
+        shoes: avatar_itemData[user_avatarItemsKey].shoes,
+    }
+  }
+}
+
 /*
   Adds item to user's item list! 
 */
@@ -475,9 +511,17 @@ function addItem(index) {
   var update = {};
   update[user_key] = user_items;
   refItems.update(update);
-  console.log("Updated items: "+ user_items);
+  console.log("Updated items");
 }
 
+function updateOnAvatarItems() {
+  var update = {};
+  update[user_avatarItemsKey] = avatar_items;
+  refAvatar.update(update);
+  console.log("Updated avatar");
+
+
+}
 //////////////////// LOCATION POINTS GENERATOR ////////////////////
 function generateRandomPoints(){
   //var prevPoints= [];

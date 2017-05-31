@@ -150,7 +150,20 @@ function selectTab(tabNum) {
 }*/
 
 var sender;
+var refItems;
+var refAvatar;
+var database;
+var user_key; // used for items
+var user_avatarItemsKey; // used for items on avatar
+
+
 var user_items;
+//var avatar_items;
+var avatar_items = {
+  hat: 99,
+  shirt: 99,
+  shoes: 99
+}
 // Item map
 var item_map = {
   CowboyHat: 0,
@@ -170,7 +183,8 @@ var item_map = {
   RedSneakers: 14,
   RedSocks: 15
 }
-initFirebase();
+
+
 
 /* FIREBASE */
 function initFirebase() {
@@ -184,7 +198,7 @@ function initFirebase() {
   };
   
   firebase.initializeApp(config);
-  //firebase.database();
+  database = firebase.database();
   //refPoints = database.ref('points');
    // FIREBASE
   const lg_signout = document.getElementById('lg_signout');
@@ -200,9 +214,11 @@ function initFirebase() {
           sender = firebaseUser.uid;
            /* LOADING USER'S ITEMS */
           // Creating reference to user's items
-          refItems = database.ref(sender+"/items")
+          refItems = database.ref(sender+"/items");
+          refAvatar = database.ref(sender+"/avatar");
           // Retrieving user's items - will get saved in user_items, key will get saved in user_key
           var item1 = refItems.on('value',getItemVal,errData);
+          refAvatar.on('value',getAvatarData,errData);
           
         } else {
           console.log('not logged in');
@@ -211,6 +227,7 @@ function initFirebase() {
     });
 }
 
+initFirebase();
 
 /*
   Called by refItems.on(..)
@@ -257,4 +274,45 @@ function getItemVal(data) {
     }
   }
  
+}
+
+function getAvatarData(data) {
+	// Retrieving data if any
+  var avatar_itemData = data.val();
+  
+
+  // Check if new user - has no real items reference key
+  if (avatar_itemData == null)
+  {
+    refAvatar.push(avatar_items);
+  }
+  // Returning user - has items reference key
+  else 
+  {
+    var keys = Object.keys(avatar_itemData);
+    user_avatarItemsKey = keys[0];
+
+
+    //retrieve data
+    avatar_items = {
+        hat: avatar_itemData[user_avatarItemsKey].hat,
+        shirt: avatar_itemData[user_avatarItemsKey].shirt,
+        shoes: avatar_itemData[user_avatarItemsKey].shoes,
+    }
+  }
+}
+
+function errData(err) {
+  console.log('Error!');
+  console.log(err);
+}
+
+/* Update what items avatar is wearing in firebase */
+function updateOnAvatarItems() {
+  var update = {};
+  update[user_avatarItemsKey] = avatar_items;
+  refAvatar.update(update);
+  console.log("Updated avatar");
+
+
 }
