@@ -148,3 +148,113 @@ function selectTab(tabNum) {
 	inventorybg.style.backgroundColor = tabColorArr[tabNum];
 	inventorybg.innerHTML = tabNum;
 }*/
+
+var sender;
+var user_items;
+// Item map
+var item_map = {
+  CowboyHat: 0,
+  PropellerHat: 1,
+  GraduationCap: 2,
+  MagicalHat: 3,
+  SunHat: 4,
+  TopHat:5, 
+  BabyBlueShirt: 6,
+  BlueShirtWhiteTrim: 7,
+  GreenStripeShirt: 8,
+  LeatherShirtWhiteTrim: 9,
+  PeachPolkaDotShirt: 10,
+  BlueSocks: 11,
+  BrownBoots: 12,
+  GreenSneakers: 13,
+  RedSneakers: 14,
+  RedSocks: 15
+}
+initFirebase();
+
+/* FIREBASE */
+function initFirebase() {
+  var config = {
+    apiKey: "AIzaSyD3R60ccA0wuNN40tV_aLPGQZl4yrUjcTQ",
+    authDomain: "ferret-82825.firebaseapp.com",
+    databaseURL: "https://ferret-82825.firebaseio.com",
+    projectId: "ferret-82825",
+    storageBucket: "ferret-82825.appspot.com",
+    messagingSenderId: "285929520709"
+  };
+  
+  firebase.initializeApp(config);
+  //firebase.database();
+  //refPoints = database.ref('points');
+   // FIREBASE
+  const lg_signout = document.getElementById('lg_signout');
+
+  lg_signout.addEventListener('click', e => {
+    firebase.auth().signOut();
+  });
+
+   firebase.auth().onAuthStateChanged(firebaseUser => {
+        if(firebaseUser) {
+          console.log(firebaseUser);
+
+          sender = firebaseUser.uid;
+           /* LOADING USER'S ITEMS */
+          // Creating reference to user's items
+          refItems = database.ref(sender+"/items")
+          // Retrieving user's items - will get saved in user_items, key will get saved in user_key
+          var item1 = refItems.on('value',getItemVal,errData);
+          
+        } else {
+          console.log('not logged in');
+          window.location = './';
+        }
+    });
+}
+
+
+/*
+  Called by refItems.on(..)
+  This function retrieves the user's item data and stores it
+  in global variable 'user_items' which can be used in the rest of map.js.
+  It also stores the items' key in global var 'user_key', which is necessary
+  to perform updates to the data.
+*/
+function getItemVal(data) {
+  // Retrieving data if any
+  var items_data = data.val();
+  
+
+  // Check if new user - has no real items reference key
+  if (items_data == null)
+  {
+    refItems.push(item_data);
+  }
+  // Returning user - has items reference key
+  else 
+  {
+    var keys = Object.keys(items_data);
+    user_key = keys[0];
+
+
+    //retrieve data
+    user_items = {
+        item0: items_data[user_key].item0,
+        item1: items_data[user_key].item1,
+        item2: items_data[user_key].item2,
+        item3: items_data[user_key].item3,
+        item4: items_data[user_key].item4,
+        item5: items_data[user_key].item5,
+        item6: items_data[user_key].item6,
+        item7: items_data[user_key].item7,
+        item8: items_data[user_key].item8,
+        item9: items_data[user_key].item9,
+        item10: items_data[user_key].item10,
+        item11: items_data[user_key].item11,
+        item12: items_data[user_key].item12,
+        item13: items_data[user_key].item13,
+        item14: items_data[user_key].item14,
+        item15: items_data[user_key].item15
+    }
+  }
+ 
+}
