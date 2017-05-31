@@ -13,6 +13,45 @@ var savedHatUrl;
 var savedShirtUrl;
 var savedShoesUrl;
 
+// Variables for Firebase retrieval and update
+var sender;
+var refItems;
+var refAvatar;
+var database;
+var user_key; // used for items
+var user_avatarItemsKey; // used for items on avatar
+
+
+var user_items;
+//var avatar_items;
+var avatar_items = {
+  hat: 99,
+  shirt: 99,
+  shoes: 99
+}
+// Item map
+var item_map = {
+  CowboyHat: 0,
+  PropellerHat: 1,
+  GraduationCap: 2,
+  MagicalHat: 3,
+  SunHat: 4,
+  TopHat:5, 
+  BabyBlueShirt: 6,
+  BlueShirtWhiteTrim: 7,
+  GreenStripeShirt: 8,
+  LeatherShirtWhiteTrim: 9,
+  PeachPolkaDotShirt: 10,
+  BlueSocks: 11,
+  BrownBoots: 12,
+  GreenSneakers: 13,
+  RedSneakers: 14,
+  RedSocks: 15
+}
+
+
+
+
 //until the actual data is inputted
 var dummy_item_data = {
   item0: 1,
@@ -35,15 +74,10 @@ var dummy_item_data = {
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	//loadTabColors();
-	loadAvatars();
+	// Calling Firebase
+	initFirebase();
 
-	// load base ferret avatar
-	avatarBase = loadImg("/images/avatar/Ferret.png");
-  // layer items
-	loadImg(shoesUrl);
-	loadImg(shirtUrl);
-	loadImg(hatUrl);
-	save();
+	
 
 	// One way to change an image
 	//shoes.src = "/images/avatar/shoes/RedSneakers.png";
@@ -175,7 +209,7 @@ function selectTab(tabNum) {
 
 function loadAvatars(){
 	console.log(document.getElementById("all_items"));
-	for (avatar in dummy_item_data) {
+	for (avatar in user_items) {
 		var avatarPath;
 
 		var htmlpart1 = "<div class='col-xs-4 col-sm-2'> <a href='#' onclick= \" updateAvatar(this.children[0].src,'hats'); return false; \" ><img src=";
@@ -233,7 +267,7 @@ function loadAvatars(){
 				break;	
 		}
 		
-		if( dummy_item_data[avatar] == 1){
+		if( user_items[avatar] == 1){
 			var path = htmlpart1 + avatarPath + htmlpart2;
 
 			document.getElementById("all_items").innerHTML += path;
@@ -244,40 +278,6 @@ function loadAvatars(){
 	}
 }
 
-var sender;
-var refItems;
-var refAvatar;
-var database;
-var user_key; // used for items
-var user_avatarItemsKey; // used for items on avatar
-
-
-var user_items;
-//var avatar_items;
-var avatar_items = {
-  hat: 99,
-  shirt: 99,
-  shoes: 99
-}
-// Item map
-var item_map = {
-  CowboyHat: 0,
-  PropellerHat: 1,
-  GraduationCap: 2,
-  MagicalHat: 3,
-  SunHat: 4,
-  TopHat:5, 
-  BabyBlueShirt: 6,
-  BlueShirtWhiteTrim: 7,
-  GreenStripeShirt: 8,
-  LeatherShirtWhiteTrim: 9,
-  PeachPolkaDotShirt: 10,
-  BlueSocks: 11,
-  BrownBoots: 12,
-  GreenSneakers: 13,
-  RedSneakers: 14,
-  RedSocks: 15
-}
 
 
 
@@ -320,9 +320,10 @@ function initFirebase() {
           window.location = './';
         }
     });
+
+   
 }
 
-initFirebase();
 
 /*
   Called by refItems.on(..)
@@ -368,7 +369,16 @@ function getItemVal(data) {
         item15: items_data[user_key].item15
     }
   }
- 
+  loadAvatars();
+
+	// load base ferret avatar
+	avatarBase = loadImg("/images/avatar/Ferret.png");
+  // layer items
+	loadImg(shoesUrl);
+	loadImg(shirtUrl);
+	loadImg(hatUrl);
+	save();
+
 }
 
 function getAvatarData(data) {

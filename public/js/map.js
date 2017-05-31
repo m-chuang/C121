@@ -195,7 +195,7 @@ function initMap() {
 
 
   // CREATE INFOWINDOW FOR ITEMS
-  infoWindow = new google.maps.InfoWindow();
+  infowindow = new google.maps.InfoWindow();
 
   // ITEM HANDLING
   map.data.loadGeoJson('https://gist.githubusercontent.com/ashleymp/59d075bd2ef1ba1e893a13bc5e58366f/raw/c0bcfe26065629f5d116a05baa2311aee8c89c14/mapItems.geojson');
@@ -213,7 +213,7 @@ function initMap() {
     infowindow.setPosition(event.latLng);
     infowindow.setContent("<font color=black>"+event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"</font>");
     //infowindow.setContent("<font color=black>"+event.feature.getProperty('name')+"<br /> <br />"+event.feature.getProperty('description')+"<br /> <br />"+'<center><button onclick="infowindow.close()"><font color=black>Pick Up Item</font></button></center>' +"</font>");
-    //addItem(event.feature.getProperty('item_num'));
+    addItem(event.feature.getProperty('item_num'));
 
     infowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
     infowindow.open(map);
