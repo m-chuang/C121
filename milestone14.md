@@ -12,7 +12,7 @@ I made items "disappear" from the map upon selecting them. Once a user has colle
 
 
 ### Scott ###
-.
+For this milestone, I begin integration with the backend end server. Our avatar functionality worked by itself locally, but it couldnt pull data and display it from a database. So I worked with ashley to be able to display account specific items and display the users desired avatars. I also update the map styling to remove excess roads and clutter so that map would look for rural versus urban.
 
 ### Tina ###
 I changed the item markers from the default generic marker image to an image of a mystery present box. This was a UI feature requested from class feedback, so the marker images would match with the theme of the app more.
