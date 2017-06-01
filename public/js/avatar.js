@@ -88,6 +88,7 @@ $(document).ready(function() {
 
 // Load images by URL onto the canvas
 function loadImg(imgUrl) {
+	if(imgUrl == ""){ return;}
 	var imgObj = new Image();
 	var newString = String(imgUrl);
 	imgObj.src = newString;
@@ -146,6 +147,12 @@ function drawAvatar(){
 	loadImg(hatUrl);
 	
 
+}
+function clearAvatar(){
+	hatUrl = "";
+	shirtUrl ="";
+	shoesUrl ="";
+	drawAvatar();
 }
 
 function save(){
@@ -287,7 +294,21 @@ function loadAvatars(){
 		if( user_items[avatar] == 1){
 			var path = htmlpart1 + avatarType + htmlpart2 + avatarPath + htmlpart3;
 
+			// Add to All Items
 			document.getElementById("all_items").innerHTML += path;
+
+			switch(avatarType){
+				case "hats":
+					document.getElementById("hat_items").innerHTML += path;
+					break;
+				case "shirts":
+					document.getElementById("shirt_items").innerHTML += path;
+
+					break
+				case "shoes":
+					document.getElementById("shoes_items").innerHTML += path;
+					break;
+			}
 		} 
 		else{
 
