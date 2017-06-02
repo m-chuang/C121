@@ -13,6 +13,8 @@ var savedHatUrl;
 var savedShirtUrl;
 var savedShoesUrl;
 
+
+
 // Variables for Firebase retrieval and update
 var sender;
 var refItems;
@@ -156,10 +158,27 @@ function clearAvatar(){
 }
 
 function save(){
+	console.log("Yup");
+	console.log(getItemNum(hatUrl));
+	console.log(getItemNum(shirtUrl));
+	console.log(getItemNum(shoesUrl));
+	avatar_items = {
+    hat: getItemNum(hatUrl),
+    shirt: getItemNum(shirtUrl),
+    shoes: getItemNum(shoesUrl)
+   }
+
+	updateOnAvatarItems();
+
+
 	savedHatUrl = hatUrl;
 	savedShirtUrl = shirtUrl;
 	savedShoesUrl = shoesUrl;
+
+
 	drawAvatar();
+
+
 }
 
 function restore(){
@@ -352,7 +371,8 @@ function initFirebase() {
           // Retrieving user's items - will get saved in user_items, key will get saved in user_key
           var item1 = refItems.on('value',getItemVal,errData);
           refAvatar.on('value',getAvatarData,errData);
-          
+
+
         } else {
           console.log('not logged in');
           window.location = './';
@@ -386,7 +406,6 @@ function getItemVal(data) {
     var keys = Object.keys(items_data);
     user_key = keys[0];
 
-    console.log("INFO"+user_key);
     //retrieve data
     user_items = {
         item0: items_data[user_key].item0,
@@ -409,13 +428,20 @@ function getItemVal(data) {
   }
   loadAvatars();
 
-	// load base ferret avatar
-	avatarBase = loadImg("/images/avatar/Ferret.png");
+ 
+  // load base ferret avatar
+  avatarBase = loadImg("/images/avatar/Ferret.png");
   // layer items
+  // Update Items according to database
+  shoesUrl = getItemURL(avatar_items["shoes"]);
+  shirtUrl = getItemURL(avatar_items["shirt"]);
+  hatUrl = getItemURL(avatar_items["hat"]);
+
+
 	loadImg(shoesUrl);
 	loadImg(shirtUrl);
 	loadImg(hatUrl);
-	save();
+	//save();
 
 }
 
@@ -443,6 +469,14 @@ function getAvatarData(data) {
         shoes: avatar_itemData[user_avatarItemsKey].shoes,
     }
   }
+  shoesUrl = getItemURL(avatar_items["shoes"]);
+  shirtUrl = getItemURL(avatar_items["shirt"]);
+  hatUrl = getItemURL(avatar_items["hat"]);
+
+
+	loadImg(shoesUrl);
+	loadImg(shirtUrl);
+	loadImg(hatUrl);
 }
 
 function errData(err) {
@@ -459,3 +493,145 @@ function updateOnAvatarItems() {
 
 
 }
+
+function getItemURL(itemNum){
+	var avatarBasePath = "/images/avatar/";
+	var avatarPath = "";
+	var avatarType;
+
+
+	switch(itemNum){
+			case 0:
+				avatarPath = "/CowboyHat.png";
+				avatarType = "hats";
+				break;
+			case 1:
+				avatarPath = "/PropellerHat.png";
+				avatarType = "hats";
+				break;
+			case 2:
+				avatarPath = "/GraduationCap.png";
+				avatarType = "hats";
+				break;
+			case 3:
+				avatarPath = "/MagicalHat.png";
+				avatarType = "hats";
+				break;
+			case 4:
+				avatarPath = "/SunHat.png";
+				avatarType = "hats";
+				break;
+			case 5:
+				avatarPath = "/TopHat.png";
+				avatarType = "hats";
+				break;
+			case 6:
+				avatarPath = "/BabyBlueShirt.png";
+				avatarType = "shirts";
+				break;
+			case 7:
+				avatarPath = "/BlueShirtWhiteTrim.png";
+				avatarType = "shirts";
+				break;
+			case 8:
+				avatarPath = "/GreenStripeShirt.png";
+				avatarType = "shirts";
+				break;
+			case 9:
+				avatarPath = "/LeatherShirtWhiteTrim.png";
+				avatarType = "shirts";
+				break;
+			case 10:
+				avatarPath = "/PeachPolkaDotShirt.png";
+				avatarType = "shirts";
+				break;
+			case 11:
+				avatarPath = "/BlueSocks.png";
+				avatarType = "shoes";
+				break;
+			case 12:
+				avatarPath = "/BrownBoots.png";
+				avatarType = "shoes";
+				break;
+			case 13:
+				avatarPath = "/GreenSneakers.png";
+				avatarType = "shoes";
+				break;
+			case 14:
+				avatarPath = "/RedSneakers.png";
+				avatarType = "shoes";
+				break;
+			case 15:
+				avatarPath = "/RedSocks.png";
+				avatarType = "shoes";
+				break;	
+			default:
+				return "";
+		}
+
+		return avatarBasePath + avatarType + avatarPath; 
+
+}
+
+function getItemNum(itemURL){
+	var itemNum;
+
+
+	switch (itemURL) {
+		case "/images/avatar/hats/CowboyHat.png":
+			itemNum = 0;
+			break;
+		case "/images/avatar/hats/PropellerHat.png":
+			itemNum = 1;
+			break;
+		case "/images/avatar/hats/GraduationCap.png":
+			itemNum = 2;
+			break;
+		case "/images/avatar/hats/MagicalHat.png":
+			itemNum = 3;
+			break;
+		case "/images/avatar/hats/SunHat.png":
+			itemNum = 4;
+			break;
+		case "/images/avatar/hats/TopHat.png":
+			itemNum = 5;
+			break;
+		case "/images/avatar/shirts/BabyBlueShirt.png":
+			itemNum = 6;
+			break;
+		case "/images/avatar/shirts/BlueShirtWhiteTrim.png":
+			itemNum = 7;
+			break;
+		case "/images/avatar/shirts/GreenStripeShirt.png":
+			itemNum = 8;
+			break;
+		case "/images/avatar/shirts/LeatherShirtWhiteTrim.png":
+			itemNum = 9;
+			break;
+		case "/images/avatar/shirts/PeachPolkaDotShirt.png":
+			itemNum = 10;
+			break;
+		case "/images/avatar/shoes/BlueSocks.png":
+			itemNum = 11;
+			break;
+		case "/images/avatar/shoes/BrownBoots.png":
+			itemNum = 12;
+			break;
+		case "/images/avatar/shoes/GreenSneakers.png":
+			itemNum = 13;
+			break;
+		case "/images/avatar/shoes/RedSneakers.png":
+			itemNum = 14;
+			break;
+		case "/images/avatar/shoes/RedSocks.png":
+			itemNum = 15;
+			break;
+		default:	
+			itemNum = 99;
+			break;
+	}
+
+	return itemNum;
+
+}
+ 
