@@ -386,7 +386,7 @@ function getItemVal(data) {
     var keys = Object.keys(items_data);
     user_key = keys[0];
 
-
+    console.log("INFO"+user_key);
     //retrieve data
     user_items = {
         item0: items_data[user_key].item0,
