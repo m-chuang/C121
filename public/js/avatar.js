@@ -190,7 +190,8 @@ function restore(){
 
 function saveAvatar(){
   var canvas = document.getElementById("avatarCanvas");
-  document.write('<img src="'+canvas.toDataURL("image/png")+'"/>')
+  //document.write('<img src="'+canvas.toDataURL("image/png")+'"/>');
+  window.location=canvas.toDataURL('png')
 
   /*var Vcanvas = document.createElement("CANVAS");
   Vcanvas.height = "284";

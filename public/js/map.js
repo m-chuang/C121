@@ -2,7 +2,7 @@
 var map;
 var defaultCenter;
 var marker;
-var icon = "/images/avatar/Ferret.png";
+var icon = "";
 var heatmap;
 var GeoMarker;
 var errorCircle;
