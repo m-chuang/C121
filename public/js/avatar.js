@@ -137,24 +137,26 @@ function updateAvatar(image,type){
 			console.log("Case statement messed up in updateAvatar");
 	}		
 	// Redraw the canvas with the updated items
-	drawAvatar();
+	drawAvatar(drawAvatarClothes);
 }
 
-function drawAvatar(){
+function drawAvatar(callback){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	avatarBase = loadImg("/images/avatar/Ferret.png");
 	// layer items
+	callback();
+
+}
+function drawAvatarClothes(){
 	loadImg(shoesUrl);
 	loadImg(shirtUrl);
 	loadImg(hatUrl);
-	
-
 }
 function clearAvatar(){
 	hatUrl = "";
 	shirtUrl ="";
 	shoesUrl ="";
-	drawAvatar();
+	drawAvatar(drawAvatarClothes);
 }
 
 function save(){
@@ -176,7 +178,7 @@ function save(){
 	savedShoesUrl = shoesUrl;
 
 
-	drawAvatar();
+	drawAvatar(drawAvatarClothes);
 
 
 }
@@ -185,7 +187,7 @@ function restore(){
 	hatUrl = savedHatUrl;
 	shirtUrl = savedShirtUrl;
 	shoesUrl = savedShoesUrl;
-	drawAvatar();
+	drawAvatar(drawAvatarClothes);
 }
 
 function saveAvatar(){
@@ -439,7 +441,11 @@ function getItemVal(data) {
   hatUrl = getItemURL(avatar_items["hat"]);
 
 
-	loadImg(shoesUrl);
+  savedHatUrl = getItemURL(avatar_items["hat"]);
+  savedShirtUrl = shirtUrl;
+  savedShoesUrl = shoesUrl;
+
+	loadImg(shoesUrl);	
 	loadImg(shirtUrl);
 	loadImg(hatUrl);
 	//save();
@@ -474,6 +480,9 @@ function getAvatarData(data) {
   shirtUrl = getItemURL(avatar_items["shirt"]);
   hatUrl = getItemURL(avatar_items["hat"]);
 
+  savedHatUrl = getItemURL(avatar_items["hat"]);
+  savedShirtUrl = getItemURL(avatar_items["shirt"]);
+  savedShoesUrl = getItemURL(avatar_items["shoes"]);
 
 	loadImg(shoesUrl);
 	loadImg(shirtUrl);

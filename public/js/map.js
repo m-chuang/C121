@@ -483,12 +483,18 @@ function getAvatarData(data) {
     }
   }
 
+  function drawAvatar(callback){
+    loadImg("/images/avatar/Ferret.png");
+    callback();  
+  }
   // Virtually put on the avatar to make the ferret avatar
-  loadImg("/images/avatar/Ferret.png");
+  
+  function drawAvatarClothes(){
   loadImg(getItemURL(avatar_items["hat"]));
   loadImg(getItemURL(avatar_items["shirt"]));
   loadImg(getItemURL(avatar_items["shoes"]));
-  
+  }
+  drawAvatar(drawAvatarClothes);
 }
 
 /*
