@@ -308,7 +308,7 @@ function CenterControl(controlDiv, map) {
   var controlUI = document.createElement('div');
   controlUI.style.backgroundColor = 'rgba(0,0,0,0.25)';
   controlUI.style.border = '1px solid #fff';
-  controlUI.style.borderRadius = '3px';
+  controlUI.style.borderRadius = '5px';
   //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
   controlUI.style.marginBottom = '30px';
@@ -339,7 +339,7 @@ function HelpControl(controlDiv, map) {
   var controlUI = document.createElement('div');
   //controlUI.style.backgroundColor = '#fff';
   controlUI.style.border = '1px solid #fff';
-  controlUI.style.borderRadius = '3px';
+  controlUI.style.borderRadius = '5px';
   //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
   controlUI.style.marginBottom = '15px';
