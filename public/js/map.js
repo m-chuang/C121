@@ -88,9 +88,10 @@ function initMap() {
   // MAP INITIALIZATION
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18,                   // default zoom level
-    center: defaultCenter,      // center map at default location
+    center: defaultCenter,      // center map at default location   
     streetViewControl: false,   // disable Street View
     clickableIcons: false,      // disable default Google POIs
+    zoomControl: false,         // disable zoom controls
     draggable: true,            // DEBUG: set to true
     maxZoom: 18,                // DO NOT CHANGE    
     //minZoom: 18,              // DEBUG: change to 1
@@ -239,7 +240,7 @@ function initMap() {
   var helpControl = new HelpControl(helpControlDiv, map);
 
   helpControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.LEFT_CENTER].push(helpControlDiv);
+  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(helpControlDiv);
 
   // CREATE INFOWINDOW FOR HELP
   helpinfowindow = new google.maps.InfoWindow({
@@ -305,19 +306,19 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 function CenterControl(controlDiv, map) {
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
+  controlUI.style.backgroundColor = 'rgba(0,0,0,0.25)';
+  controlUI.style.border = '1px solid #fff';
   controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '22px';
+  controlUI.style.marginBottom = '30px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
 
   // Set CSS for the control interior.
   var controlText = document.createElement('div');
-  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.color = 'white';
   controlText.style.fontFamily = 'Source Sans Pro,Helvetica,sans-serif';
   controlText.style.fontSize = '16px';
   controlText.style.lineHeight = '30px';
@@ -336,20 +337,20 @@ function CenterControl(controlDiv, map) {
 function HelpControl(controlDiv, map) {
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
+  //controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '1px solid #fff';
   controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginTop = '20px';
-  controlUI.style.marginLeft = '20px';
+  controlUI.style.marginBottom = '15px';
+  controlUI.style.marginRight = '20px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Help: Get Started';
   controlDiv.appendChild(controlUI);
 
   // Set CSS for the control interior.
   var controlText = document.createElement('div');
-  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.color = 'white';
   controlText.style.fontFamily = 'Source Sans Pro,Helvetica,sans-serif';
   controlText.style.fontSize = '16px';
   controlText.style.lineHeight = '30px';
