@@ -142,47 +142,7 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
   }
 
-  // Get Data URL for avatar ferret //
-  // Load images by URL onto the canvas
-  var virtualCanvas = document.createElement("CANVAS");
-  virtualCanvas.height = "284";
-  virtualCanvas.width = "486";
-  var ctx = virtualCanvas.getContext("2d");
-  var avatarDataUrl;
-
-  function loadImg(imgUrl) {
-    var imgObj = new Image();
-    var newString = String(imgUrl);
-    imgObj.src = newString;
-
-    imgObj.onload = function() {
-      ctx.drawImage(imgObj, 0, 0);
-      avatarDataUrl = virtualCanvas.toDataURL();
-      // FERRET IMAGE PROPERTIES
-      icon = {
-        url: avatarDataUrl.toString(),
-        scaledSize: new google.maps.Size(160, 100), // scaled smaller
-        origin: new google.maps.Point(0, 0),
-        //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
-      };
-
-      /*console.log(icon);
-
-      // CURRENT LOCATION MARKER INITIALIZATION (FERRET IMAGE)
-      marker = new google.maps.Marker({
-        position: defaultCenter,
-        icon: icon,
-        map: map
-      });*/
-    }
-  }
-
-  // Virtually put on the avatar to make the ferret avatar
-  loadImg("/images/avatar/Ferret.png");
-  loadImg("/images/avatar/hats/PropellerHat.png");
-  loadImg("/images/avatar/shirts/GreenStripeShirt.png");
-  loadImg("/images/avatar/shoes/BlueSocks.png"  );
-
+  
 
   // CREATE INFOWINDOW FOR ITEMS
   infowindow = new google.maps.InfoWindow();
@@ -266,8 +226,10 @@ function autoUpdate() {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
 
+
     // LOCATION MARKER UPDATER
     if (marker) {
+      marker.icon = icon;
       marker.setPosition(newPoint);
       if(!currentPoint){
         map.setCenter(newPoint);
@@ -494,6 +456,39 @@ function getAvatarData(data) {
         shoes: avatar_itemData[user_avatarItemsKey].shoes,
     }
   }
+
+      // Get Data URL for avatar ferret //
+  // Load images by URL onto the canvas
+  var virtualCanvas = document.createElement("CANVAS");
+  virtualCanvas.height = "284";
+  virtualCanvas.width = "486";
+  var ctx = virtualCanvas.getContext("2d");
+  var avatarDataUrl;
+
+  function loadImg(imgUrl) {
+    var imgObj = new Image();
+    var newString = String(imgUrl);
+    imgObj.src = newString;
+
+    imgObj.onload = function() {
+      ctx.drawImage(imgObj, 0, 0);
+      avatarDataUrl = virtualCanvas.toDataURL();
+      // FERRET IMAGE PROPERTIES
+      icon = {
+        url: avatarDataUrl.toString(),
+        scaledSize: new google.maps.Size(160, 100), // scaled smaller
+        origin: new google.maps.Point(0, 0),
+        //anchor: new google.maps.Point(100, 50) // change the anchor point of the image
+      };
+    }
+  }
+
+  // Virtually put on the avatar to make the ferret avatar
+  loadImg("/images/avatar/Ferret.png");
+  loadImg(getItemURL(avatar_items["hat"]));
+  loadImg(getItemURL(avatar_items["shirt"]));
+  loadImg(getItemURL(avatar_items["shoes"]));
+  
 }
 
 /*
@@ -910,3 +905,82 @@ var terrainStyle = [
     ]
   }
 ];
+
+function getItemURL(itemNum){
+  var avatarBasePath = "/images/avatar/";
+  var avatarPath = "";
+  var avatarType;
+
+
+  switch(itemNum){
+      case 0:
+        avatarPath = "/CowboyHat.png";
+        avatarType = "hats";
+        break;
+      case 1:
+        avatarPath = "/PropellerHat.png";
+        avatarType = "hats";
+        break;
+      case 2:
+        avatarPath = "/GraduationCap.png";
+        avatarType = "hats";
+        break;
+      case 3:
+        avatarPath = "/MagicalHat.png";
+        avatarType = "hats";
+        break;
+      case 4:
+        avatarPath = "/SunHat.png";
+        avatarType = "hats";
+        break;
+      case 5:
+        avatarPath = "/TopHat.png";
+        avatarType = "hats";
+        break;
+      case 6:
+        avatarPath = "/BabyBlueShirt.png";
+        avatarType = "shirts";
+        break;
+      case 7:
+        avatarPath = "/BlueShirtWhiteTrim.png";
+        avatarType = "shirts";
+        break;
+      case 8:
+        avatarPath = "/GreenStripeShirt.png";
+        avatarType = "shirts";
+        break;
+      case 9:
+        avatarPath = "/LeatherShirtWhiteTrim.png";
+        avatarType = "shirts";
+        break;
+      case 10:
+        avatarPath = "/PeachPolkaDotShirt.png";
+        avatarType = "shirts";
+        break;
+      case 11:
+        avatarPath = "/BlueSocks.png";
+        avatarType = "shoes";
+        break;
+      case 12:
+        avatarPath = "/BrownBoots.png";
+        avatarType = "shoes";
+        break;
+      case 13:
+        avatarPath = "/GreenSneakers.png";
+        avatarType = "shoes";
+        break;
+      case 14:
+        avatarPath = "/RedSneakers.png";
+        avatarType = "shoes";
+        break;
+      case 15:
+        avatarPath = "/RedSocks.png";
+        avatarType = "shoes";
+        break;  
+      default:
+        return "";
+    }
+
+    return avatarBasePath + avatarType + avatarPath; 
+
+}
